@@ -1,0 +1,31 @@
+{
+  "response": null,
+  "password": "test",
+  "authUserId": 6,
+  "firstName": "mybkr1",
+  "active": 1,
+  "emailAddress": "test@tnt.com",
+  "lastName": null,
+  "userId": null,
+  "isSalesAdmin": null,
+  "userName": "test",
+  "middleName": null,
+  "existingRole": "SalesAdmin",
+  "authUserRoleses": [
+    {
+      "active": 1,
+      "userRoleId": 9,
+      "authRoles": {
+        "permissions": "1",
+        "active": 1,
+        "description": "SuperAdmin Role",
+        "roleId": 4,
+        "roleName": "SalesAdmin"
+      }
+    }
+    
+  ],
+  "ordersRws": null,
+  "passwordReset": 1,
+  "code": null
+}

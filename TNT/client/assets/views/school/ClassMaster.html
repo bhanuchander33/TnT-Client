@@ -1,0 +1,236 @@
+<html>
+<head>
+
+ 
+
+ <style type="text/css">
+      .styledRadio {
+      display: inline-block;
+    }
+
+  //
+   #idConfirmDialogReName {
+        width: 450px;
+        height: 165px;
+        background-color: whitesmoke;
+        }
+       #idConfirmDialogReName .btn {
+        width: 70px;
+        margin-bottom: 8px;
+        margin-right: 15px;
+        margin-top: 80px;
+        float: right;
+        }
+       #idConfirmDialogReName h3 {
+        margin-left: 60px;
+        margin-top:15px;
+        }
+       #idConfirmDialogReName img {
+        float: left;
+        margin-left: 15px;
+        margin-top: 25px;
+        }
+
+ #idConfirmDialog {
+        width: 450px;
+        height: 165px;
+        background-color: whitesmoke;
+        }
+       #idConfirmDialog .btn {
+        width: 70px;
+        margin-bottom: 8px;
+        margin-right: 15px;
+        margin-top: 80px;
+        float: right;
+        }
+       #idConfirmDialog h3 {
+        margin-left: 60px;
+        margin-top:15px;
+        }
+       #idConfirmDialog img {
+        float: left;
+        margin-left: 15px;
+        margin-top: 25px;
+        }
+    
+    </style>
+
+  <script type="text/javascript">
+   $(function(){
+      $('input:checkbox').screwDefaultButtons({
+        image: 'url("img/checkboxSmall.jpg")',
+        width: 20,
+        height: 20
+      });
+        });
+
+    function reNameClass(idForReName,nameForReName) {
+      confirmDialogReName ('<div style="font-size:18px;">Are you sure, you want to Rename this Class?</div>', alert);
+      //req hideen input for old class id?
+      jQuery('#newClassName').val("");
+      jQuery('#oldClassName').val(nameForReName);
+      jQuery('#hiddenClassID').val(idForReName);
+    }
+
+     function disableClass(idForReName,nameForReName) {
+      confirmDialog ('<div style="font-size:18px">Are you sure, you want to disable this Class?</div>', alert);
+      //jQuery('#hiddenClassID').val(idForReName);
+    }
+    
+    function disableClassAfterConfirm(){
+      var oldClassID =jQuery('#hiddenClassID').val(); 
+      var schoolNames = jQuery("#schoolNames").val();
+      var branchNames = jQuery("#branchNames").val();//feature purpose
+      ClassMasterDWR.disableCLassMaster(branchNames,oldClassID,function(data) {
+            if(data == "success"){
+              setError("schoolNames","Success");
+              classMasterLoadDisplay();
+            }else   if(data == "notexist"){
+              setError("schoolNames","Class Name  Not Exist");
+            }else{
+            setError('schoolNames', "Fail");
+          }   
+      });
+      
+    }
+
+  function closeConfirmDialogReName () {
+      $("#idConfirmDialogReName").modal ('hide'); 
+      };
+    function okConfirmDialogReName () {
+      $("#idConfirmDialogReName").modal ('hide'); 
+     // reNameClassAfterConfirm();//need integration
+      };
+    function confirmDialogReName (prompt, callback) {
+      document.getElementById ("idConfirmDialogPromptReName").innerHTML = prompt;
+      //confirmDialogCallback = callback;
+      $("#idConfirmDialogReName").modal ("show");
+      }
+
+ function closeConfirmDialog () {
+      $("#idConfirmDialog").modal ('hide'); 
+      };
+    function okConfirmDialog () {
+      $("#idConfirmDialog").modal ('hide'); 
+      disableClassAfterConfirm();
+      };
+    function confirmDialog (prompt, callback) {
+      document.getElementById ("idConfirmDialogPrompt").innerHTML = prompt;
+      confirmDialogCallback = callback;
+      $("#idConfirmDialog").modal ("show");
+      }
+
+  </script>
+
+</head>
+<body>
+<!-- Static navbar -->
+
+
+<div style="height:80px;"><span id ="errorspan" style="color:red;font-size: 14px;font-weight: bold;" >&nbsp;</span></div>
+<div class="reg_mainCon">
+  <form>
+    <fieldset>
+    <legend><img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Class Details</legend>
+<div style="padding: 7px 20px 20px;">
+<span ng-hide="saveSuccess">Failed to add new class</span>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+     
+     <tr><td colspan="4"><label style="color:#000; text-align:center; font-size:18px; line-height:28px;"><b>Create New Class</b></label></td></tr>
+    <tr>
+          <td colspan="4" style="text-align: center;">
+          <div style="display: inline-block;"><label style="color:#000;"><b>Class Name</b></label></div>
+          <div align="left" style="display: inline-block;">
+              
+              <select class="span3" name="branchNames" ng-model="classId" ng-change="selectClassName();" id="selClassID">
+                        <option value="-3" selected="selected" >Select</option>
+                        <option value="-2">Nursery</option>
+                        <option value="-1">LKG</option>
+                        <option value="0">UKG</option>
+                        <option value="1">Standard 1</option>
+                        <option value="2">Standard 2</option>
+                        <option value="3">Standard 3</option>
+                        <option value="4">Standard 4</option>
+                        <option value="5">Standard 5</option>
+                        <option value="6">Standard 6</option>
+                        <option value="7">Standard 7</option>
+                        <option value="8">Standard 8</option>
+                        <option value="9">Standard 9</option>
+                        <option value="10">Standard 10</option>
+                        <option value="11">Standard 11</option>
+                        <option value="12">Standard 12</option>
+                       </select>      
+               <!-- <input class="span3" type="text" placeholder="" id='newClassID' name='newClassID'> -->
+          <div style='display:inline-block;'><a href="javascript:void(0);" ng-click='saveClassMaster();' style='margin-top: -4px;'  class="icon-plus"></a></div>
+             <!--  <button type="button" class="btn">Add</button> -->
+            </div></td>
+        </tr>
+      </table>
+    </div>
+    
+  <div id="classAreaID" style="line-height:50px; text-align:center; font-size:14px; color:#666666;">
+
+
+<table class="table table-bordered" width="100%" style="margin-bottom:0px;">
+                  
+                <tr><th style="text-align: center;">Class Name</th><th style="text-align: center;">Rename</th><th style="text-align: center;">Disable</th></tr>
+                     <tr ng-show="showClasses" ng-repeat="cls in classesList">
+                           <td style="text-align: center;">{{cls.className}}</td>
+                           <td style="text-align: center;">
+                          <a href="javascript:void(0);" ng-click="reNameClass(cls.branchClassId, cls.className)" >
+                          <i class="icon-edit"></i></a></td>
+                          <td style="text-align: center;"><a href="javascript:void(0);" ng-click="disableClass(cls.branchClassId)" ><i class="icon-trash"></i></a></td>
+                          </tr>
+                       
+                        
+                        <tr ng-hide="showClasses">
+                        <td colspan="3" style="color:red;font-size:16px;font-weight:bold;text-align: center;background-color:silver ">No Classes Found</td>
+                        </tr>
+                    
+                        
+                </table>
+
+
+
+
+  </div>
+    
+  <div style="padding-bottom: 11px;"></div>
+
+
+
+    </fieldset>
+  </form>
+</div>
+<div style="height:20px;"></div>
+</div>
+<!-- /container -->
+
+   <div id="idConfirmDialogReName" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <img src="./client/assets/images/alert.gif"  width="34" height="28" alt="confirm icon" /><h3 id="idConfirmDialogPromptReName"></h3>
+        <div style="text-align: center;">
+          <label style="color:#000;">Old:</label><input disabled="disabled" type="text" class="span2" id='oldClassName' />
+          <label style="color:#000;">New:</label><input type="text" class="span2" id='newClassName' ng-model="newClassName" />
+        </div>
+        <br/>
+        <div >
+          <a href="javascript:void(0);" class="btn btn-primary" style="margin-top: 0px;" ng-click="updateClassName();">Yes</a>
+          <a href="javascript:void(0);" class="btn" style="margin-top: 0px;" ng-click="cancelUpdateClassName();">No</a>
+      </div>
+      </div>
+
+<div id="idConfirmDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <img src="img/alert.gif" width="34" height="28" alt="confirm icon">
+      <h3 id="idConfirmDialogPrompt"></h3>
+      <a href="#" class="btn btn-primary" style="margin-top: 0px;" onclick="okConfirmDialog ();">Yes</a>
+      <a href="#" class="btn" style="margin-top: 0px;"onclick="closeConfirmDialog ();">No</a>
+      </div>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+
+
+
+<div class="reg_mainCon">
+
+  <form ng-submit="saveRegionalMaster();" method="post" novalidate>
+    <fieldset>
+    <legend><img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Regional Details</legend>
+<div style="padding: 7px 20px 20px;">
+
+<span ng-show="saveSuccess"> Saved Regional Master Successfully</span>
+<table width="100%" cellspacing="0" cellpadding="11" border="0">
+            <tbody>
+              <tr>
+                <td>
+                  <input type="button" class="btn btn-warning" style="float: right;height: 30px" id="hidePurposeEdit" value="Edit Previous Regionals" onclick="#">
+                </td>
+              </tr>
+            </tbody>
+</table>
+
+<table width="100%" cellspacing="0" cellpadding="11" border="0">
+            <tbody>
+<tr>
+                <td>
+                    <label style="color:#000;"><b>National Name</b></label>
+                    
+                </td>
+                <td>
+              <select class="span4" ng-model="regionalMasterVO.nationalId">
+               <option selected="selected" value="-1">National Name</option>
+               <option value="1">St Pauls Girls School</option>
+               <option value="3">Oxford Grammar School</option>
+               <option value="7">St. Pauls School</option>
+              </select>
+                    
+                </td>
+            </tr>
+
+</tbody></table>
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+        <tr>
+                <td>
+                    <label style="color:#000;"><b>Regional Name</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.regionalName">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Regional Code</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.regionalCode">
+                </td>
+            </tr>
+
+        <tr>
+                <td>
+                    <label style="color:#000;"><b>Head Office</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.headOffice">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Website</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.website">
+                </td>
+            </tr>
+ </tbody></table>
+
+<label style="color:#000;"><b>Address</b></label>     
+      <textarea style="width:87%;" rows="3" ng-model="regionalMasterVO.address"></textarea>  
+
+
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+<tr>
+                <td>
+                    <label style="color:#000;"><b>City</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.city">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Country</b></label>
+                     <select id='countrySelect' class="span3"  ng-model="regionalMasterVO.country" ng-change="changeCountry(regionalMasterVO.country)" ng-options="opt.countryId as opt.countryName for opt in countriesList">
+                       
+                      </select> 
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>State</b></label>
+                    <select id='stateSelect' class="span3"  ng-model="regionalMasterVO.state" ng-change="changeState()" ng-options="opt.stateId as opt.stateName for opt in statesList">
+                        
+                      </select> 
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Zip</b></label>
+                    <input type="text" class="span4" placeholder=" " ng-model="regionalMasterVO.pinCode">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>Phone Number</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.phoneNumber">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Mobile Number</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.mobileNumber">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>Email</b></label>
+                    <input type="text" class="span4" placeholder=" " ng-model="regionalMasterVO.emailId">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Fax</b></label>
+                    <input type="text" class="span4" placeholder=" " ng-model="regionalMasterVO.fax">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>Owner First Name</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.ownerFirstName">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Owner Last Name</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.ownerLastName">
+                </td>
+            </tr>
+          
+          <tr>
+                <td>
+                    <label style="color:#000;"><b>Owner Address</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.ownerAddress">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Owner Phone Number</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.ownerPhoneNumber">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>Owner Residence Number</b></label>
+                    <input type="text" class="span4" placeholder=" " ng-model="regionalMasterVO.ownerResidenceNumber">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Owner Mobile</b></label>
+                    <input type="text" class="span4" placeholder=" " ng-model="regionalMasterVO.ownerMobileNumber">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label style="color:#000;"><b>Owner Email</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.ownerEmailId">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>SMS Code</b></label>
+                    <input type="text" class="span4" placeholder="" ng-model="regionalMasterVO.smsCode">
+                </td>
+            </tr>
+ <tr>
+<td id="activeIDw">
+                    <label style="color:#000;"><b>Is Head Office</b></label>                    
+                    <div style="background-image: url(&quot;./client/assets/images/checkboxSmall.jpg&quot;); width: 20px; height: 20px; cursor: pointer; background-position: 0px -20px;" class="styledCheckbox"><input type="checkbox" checked="checked" ng-model="regionalMasterVO.isHeadOffice"  id="br_active" name="br_active" ></div>
+                    </td>
+<td id="activeID">
+                    <label style="color:#000;"><b>Active</b></label>                    
+                    <div style="background-image: url(&quot;./client/assets/images/checkboxSmall.jpg&quot;); width: 20px; height: 20px; cursor: pointer; background-position: 0px -20px;" class="styledCheckbox"><input type="checkbox" checked="checked" ng-model="regionalMasterVO.activeFlag"  id="br_active" name="br_active" ></div>
+                    </td>
+
+</tr>
+<tr>
+             <td style="border:none;">
+                </td>
+            <td style="border:none;">&nbsp;</td>
+        </tr>
+            <tr>
+             <td style="border:none;">
+                <input type="submit" ng-click="submitForm=true" value="Save changes" class="btn" />&nbsp;&nbsp;
+                <button type="button" class="btn">Cancel</button></td>
+            <td style="border:none;">&nbsp;</td>
+        </tr>
+        </tbody></table>
+
+    </div>
+
+    </fieldset>
+  </form>
+</div>

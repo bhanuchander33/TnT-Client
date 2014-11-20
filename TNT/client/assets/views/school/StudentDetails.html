@@ -1,0 +1,685 @@
+<html>
+<head>
+
+
+  <link href="./client/assets/css/bootstrap-fileupload.css" rel="stylesheet"
+  media="screen">
+  <link href="./client/assets/css/datepicker.css" rel="stylesheet" type="text/css"
+  media="screen">
+
+<script src="./client/assets/js/bootstrap-datetimepicker.min.js"> </script>
+<script src="./client/assets/js/bootstrap-datetimepicker.pt-BR.js"> </script>
+<script src="./client/assets/js/bootstrap-fileupload.js" type="text/javascript"></script>
+
+<style type="text/css">
+.styledRadio {
+  display: inline-block;
+}
+
+.close {
+  float: none;
+}
+
+.TogglerHaderALL .open .forChrome {
+  /*   background-color: #F5F5F5; */
+  background-image: url("./client/assets/img/icon_minus.gif");
+  background-position: 3px 4px;
+  background-repeat: no-repeat;
+  /* border: 1px solid #CCCCCC; */
+  color: #000000;
+  cursor: pointer;
+  display: block;
+  line-height: 22px;
+  padding-left: 20px;
+  text-align: left;
+  text-decoration: none;
+  /*width: 500px;*/
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.TogglerHaderALL .close .forChrome {
+  /*  background-color: #F5F5F5; */
+  background-image: url("./client/assets/img/icon_plus.gif");
+  background-position: 3px 4px;
+  background-repeat: no-repeat;
+  /*  border: 1px solid #CCCCCC; */
+  color: #000000;
+  cursor: pointer;
+  display: block;
+  line-height: 22px;
+  padding-left: 20px;
+  text-align: left;
+  text-decoration: none;
+  /* width: 500px;*/
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.span3 {
+  width: 270px;
+}
+
+input.span2 {
+ width: 85%;
+}
+
+
+</style>
+
+<script type="text/javascript">
+   $(function(){
+      $('input:checkbox').screwDefaultButtons({
+        image: 'url("./client/assets/img/checkboxSmall.jpg")',
+        width: 20,
+        height: 20
+      });
+
+     $('input:radio').screwDefaultButtons({
+        image: 'url("./client/assets/img/radioSmall.jpg")',
+        width: 20,
+        height: 20
+      });
+        });
+
+       function showTogglerBodyAll(togID){//pass id ..if u want more ....
+/*        function showTogglerBodyAll(fromWhere,togID){//pass id ..if u want more .... */
+           var toggleiD = "#"+togID;
+           var toggleiDA = "";
+            toggleiDA  = "#A"+togID;        
+              jQuery(toggleiD).toggle('slow');
+              jQuery(jQuery(toggleiDA).children()[0]).toggleClass("open close");  
+      } 
+
+
+  </script>
+
+</head>
+<body>
+  
+  <div style="height: 80px;"></div>
+  <div class="reg_mainCon">
+    <form>
+      <fieldset>
+        <legend>
+          <img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Student
+          Details
+        </legend>
+        <div style="padding: 7px 20px 20px;">
+
+          <table width="100%" cellspacing="0" cellpadding="11" border="0">
+            <tbody>
+              <tr>
+                <td><input type="button" onclick="#" value="View Students"
+                  id="hidePurposeEdit" style="float: right; height: 30px"
+                  class="btn btn-warning"></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+
+          <div
+            style="background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 6px 6px 6px 6px; color: #9DA0A4; font-size: 12px; font- weight: bold; left: -1px; margin: 0 auto; max-width: 98%; padding: 3px 3px;">
+            <div style="padding: 10px 20px 20px 20px;">
+              <fieldset>
+                <div class="TogglerHaderALL" id="Aschool">
+                  <div style="" class="open">
+
+                    <legend style="margin-bottom: 15px">
+                      <a href="Aschool" class="forChrome"
+                        onclick="showTogglerBodyAll('school'); return false;">School
+                        Details</a>
+                    </legend>
+                  </div>
+                </div>
+                <div style="display: block; padding-top: 6px;" id="school">
+                  <div id="">
+
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td><label style="color: #000;"><b>Class</b></label></td>
+                          <td>
+                          	<select id='classSelect' class="span3"  ng-model="selClass" ng-change="fetchSectionsByClassBranchMap(selClass);" ng-options="opt.branchClassId as opt.className for opt in classesList">
+                       
+                      		</select> 
+                          </td>
+                          <td><blockquote></blockquote></td>
+                          <td><label style="color: #000;"><b>Section</b></label></td>
+                          <td>
+                            <select id='sectionSelect' class="span3"  ng-model="selSection"  ng-options="opt.sectionClassId as opt.sectionName for opt in sectionsList">
+                      		</select> 
+                      	  </td>
+                        </tr>
+
+                        <tr>
+                          <td><label style="color: #000;"><b>Parent
+                                Email</b></label></td>
+                          <td><select class="span3" id="countrySelect">
+                              <option value="-1" selected="selected">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Class
+                                Admitted In</b></label></td>
+                          <td><select class="span3" id="countrySelect">
+                              <option value="-1" selected="selected">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+<div style="height: 15px;"></div>
+
+          <div
+            style="background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 6px 6px 6px 6px; color: #9DA0A4; font-size: 12px; font- weight: bold; left: -1px; margin: 0 auto; max-width: 98%; padding: 3px 3px;">
+            <div style="padding: 10px 20px 20px 20px;">
+              <fieldset>
+                <div class="TogglerHaderALL" id="Apersonal">
+                  <div style="" class="open">
+
+                    <legend style="margin-bottom: 15px">
+                      <a href="Apersonal" class="forChrome"
+                        onclick="showTogglerBodyAll('personal'); return false;">Personal
+                        Details</a>
+                    </legend>
+                  </div>
+                </div>
+                <div style="display: block; padding-top: 6px;" id="personal">
+                  <div id="">
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td><label style="color: #000;"><b>First
+                                Name</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td><blockquote></blockquote></td>
+                          <td><label style="color: #000;"><b>Middle
+                                Name</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><label style="color: #000;"><b>Last
+                                Name</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>DOB</b></label></td>
+                          <td>
+                            <div id="dobDate" class="input-append date">
+                              <input class="span3" style="width: 84%;" type="text"
+                                data-format="yyyy-MM-dd" name="dobDateFrom"
+                                id="dobDateFrom"></input> <span class="add-on">
+                                <i data-time-icon="icon-time"
+                                data-date-icon="icon-calendar" class="icon-calendar"></i>
+                              </span>
+                            </div>
+
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Gender</b></label></td>
+                          <td><select id='genderSelect' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">Male</option>
+                              <option value="3">Female</option>
+                              <option value="3">Other</option>
+                          </select></td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Photo</b></label></td>
+                          <td>
+                            <div id="editFile"></div>
+                            <div class="fileupload fileupload-new"
+                              data-provides="fileupload">
+                              <div class="input-append">
+                                <div class="uneditable-input span2">
+                                  <i class="icon-file fileupload-exists"></i> <span
+                                    class="fileupload-preview"></span>
+                                </div>
+                                <span class="btn btn-file"> <span class="fileupload-new">Select file</span>
+                                  <span class="fileupload-exists">Change</span> 
+                                  <input type="file" class="btn btn-warning" name="fileUP" id="fileUP" /></span>
+                                  <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                              </div>
+                            </div>
+                          </td>
+
+                        </tr>
+
+                        <tr>
+                          <td><label style="color: #000;"><b>Religion</b></label></td>
+                          <td><select id='religion' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">Hindu</option>
+                              <option value="3">Female</option>
+                              <option value="3">Other</option>
+                          </select>
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Mother
+                                touge</b></label></td>
+                          <td>
+                          <select id='motherTouge' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">Telugu</option>
+                              <option value="3">Female</option>
+                              <option value="3">Other</option>
+                          </select>
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Blood
+                                Group</b></label></td>
+                          <td>
+                          <select id='bloodGroup' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">Hindu</option>
+                              <option value="3">Female</option>
+                              <option value="3">Other</option>
+                          </select>
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Email</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Phone
+                                Number</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Pre
+                                Emergency Number</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Natinaolity</b></label></td>
+                          <td>
+                          <select id='natinaolity' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">Indian</option>
+                              <option value="3">Female</option>
+                              <option value="3">Other</option>
+                          </select>
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Adhar
+                                Card Number</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Address</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>City</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>District</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>State</b></label></td>
+                          <td><select id='stateSelect' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Country</b></label></td>
+                          <td><select id='stateSelect' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Pin</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <div style="height: 15px;"></div>
+
+          <div
+            style="background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 6px 6px 6px 6px; color: #9DA0A4; font-size: 12px; font- weight: bold; left: -1px; margin: 0 auto; max-width: 98%; padding: 3px 3px;">
+            <div style="padding: 10px 20px 20px 20px;">
+              <fieldset>
+                <div class="TogglerHaderALL" id="Aoldschool">
+                  <div style="" class="open">
+
+                    <legend style="margin-bottom: 15px">
+                      <a href="Aoldschool" class="forChrome"
+                        onclick="showTogglerBodyAll('oldschool'); return false;">Old
+                        School Details</a>
+                    </legend>
+                  </div>
+                </div>
+                <div style="display: block; padding-top: 6px;" id="oldschool">
+                  <div id="">
+
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td><label style="color: #000;"><b>Name</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td><blockquote></blockquote></td>
+                          <td><label style="color: #000;"><b>Phone Number</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td><label style="color: #000;"><b>Address</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>City</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                        </tr>
+                        <tr>
+                          
+                          <td><label style="color: #000;"><b>State </b></label></td>
+                          <td><select id='stateSelect' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+                               <td></td>
+                      
+                        <tr>
+                          <td><label style="color: #000;"><b>Country</b></label></td>
+                          <td><select id='stateSelect' class="span3">
+                              <option selected="selected" value="-1">Select</option>
+                              <option value="1">India</option>
+                              <option value="3">US</option>
+                          </select></td>
+                          </td>
+                     
+
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+
+          <div style="height: 15px;"></div>
+
+          <div
+            style="background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 6px 6px 6px 6px; color: #9DA0A4; font-size: 12px; font- weight: bold; left: -1px; margin: 0 auto; max-width: 98%; padding: 3px 3px;">
+            <div style="padding: 10px 20px 20px 20px;">
+              <fieldset>
+                <div class="TogglerHaderALL" id="Aadmission">
+                  <div style="" class="open">
+
+                    <legend style="margin-bottom: 15px">
+                      <a href="Aadmission" class="forChrome"
+                        onclick="showTogglerBodyAll('admission'); return false;">Admission
+                        Details</a>
+                    </legend>
+                  </div>
+                </div>
+                <div style="display: block; padding-top: 6px;" id="admission">
+                  <div id="">
+
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+                        <tr>
+                          <td><label style="color: #000;"><b>Admission
+                                Number</b></label></td>
+                          <td><input type="text" placeholder="" class="span3">
+                          </td>
+                          <td><blockquote></blockquote></td>
+                          <td><label style="color: #000;"><b>Register
+                                Date</b></label></td>
+                          <td>
+
+
+                            <div id="registerDate" class="input-append date">
+                              <input class="span3" style="width: 84%;" type="text"
+                                data-format="yyyy-MM-dd" name="registerDateFrom"
+                                id="registerDateFrom"></input> <span class="add-on">
+                                <i data-time-icon="icon-time"
+                                data-date-icon="icon-calendar" class="icon-calendar"></i>
+                              </span>
+                            </div>
+
+
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><label style="color: #000;"><b>Joing
+                                Date</b></label></td>
+                          <td>
+                            <div id="joiningDate" class="input-append date">
+                              <input class="span3" style="width: 79%;" type="text"
+                                data-format="yyyy-MM-dd" name="joiningDateFrom"
+                                id="joiningDateFrom"></input> <span class="add-on">
+                                <i data-time-icon="icon-time"
+                                data-date-icon="icon-calendar" class="icon-calendar"></i>
+                              </span>
+                            </div>
+
+                          </td>
+                          <td></td>
+                          <td><label style="color: #000;"><b>Admission
+                                Date</b></label></td>
+                          <td>
+
+                            <div id="admissionDate" class="input-append date">
+                              <input class="span3" style="width: 84%;" type="text"
+                                data-format="yyyy-MM-dd" name="admissionDateFrom"
+                                id="admissionDateFrom"></input> <span class="add-on">
+                                <i data-time-icon="icon-time"
+                                data-date-icon="icon-calendar" class="icon-calendar"></i>
+                              </span>
+                            </div>
+
+                          </td>
+                        </tr>
+
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+  <div style="height: 15px;"></div>
+
+          <div
+            style="background-color: #FFFFFF; border: 1px solid #DDDDDD; border-radius: 6px 6px 6px 6px; color: #9DA0A4; font-size: 12px; font- weight: bold; left: -1px; margin: 0 auto; max-width: 98%; padding: 3px 3px;">
+            <div style="padding: 10px 20px 20px 20px;">
+              <fieldset>
+                <div class="TogglerHaderALL" id="Aparent">
+                  <div style="" class="open">
+
+                    <legend style="margin-bottom: 15px">
+                      <a href="Aparent" class="forChrome"
+                        onclick="showTogglerBodyAll('parent'); return false;">Parent
+                        Details</a>
+                    </legend>
+                  </div>
+                </div>
+                <div style="display: block; padding-top: 6px;" id="parent">
+                  <div id="">
+
+                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                      <tbody>
+
+                      <!--     Parent deatils for student  start****-->
+          
+                  <tr>
+                    <td><label style="color: #000; padding-top: 18px;"><b>Father
+                          Details</b></label></td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td><label style="color: #000;"><b>Name</b></label>
+                      <input style="" class="span2" type="text"
+                      placeholder="" name="" id=""></td>
+                    <td>&nbsp;</td>
+                    <td><label style="color: #000;"><b>Blood Group</b></label>
+                      <select name="" tabindex="5" id="" class="span2">
+                        <option value="-1">---Select one ---</option><option value="A+">A+</option><option value="B+">B+</option>
+                        <option value="AB+">AB+</option><option value="O+">O+</option>
+                        <option value="O-">O-</option><option value="AB-">AB-</option>
+                        <option value="A-">A-</option>
+                      </select></td>
+                    <td>&nbsp;</td>
+                    <td><label style="color: #000;"><b>Email ID</b></label>
+                      <input style="" class="span2" type="text"
+                      placeholder="" name="fEmail" id=""></td>
+                    <td>&nbsp;</td>
+                    <td><label style="color: #000;"><b>Phone</b></label> <input
+                      style="" class="span2" type="text"
+                      placeholder="" name="fPhone" id=""></td>
+                    <td><label style="color: #000; padding-top: 1px;"><b>Default
+                          Contact</b></label> <input style="" type="radio"
+                      placeholder="" name="isDefaultPar" value="father"
+                      id="isDefaultParF" checked="checked"></td>
+                  </tr>
+                  <tr>
+                    <td><label style="color: #000; padding-top: 18px;"><b>Mother
+                          Details</b></label></td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td><input style="" class="span2"
+                      type="text" placeholder="" name="" id=""></td>
+                    <td>&nbsp;</td>
+                    <td> <select name="" tabindex="5" id="" class="span2">
+                        <option value="-1">---Select one ---</option><option value="A+">A+</option><option value="B+">B+</option>
+                        <option value="AB+">AB+</option><option value="O+">O+</option>
+                        <option value="O-">O-</option><option value="AB-">AB-</option>
+                        <option value="A-">A-</option>
+                      </select></td>
+                    <td>&nbsp;</td>
+                    <td><input style="" class="span2"
+                      type="text" placeholder="" name="" id=""></td>
+                    <td>&nbsp;</td>
+                    <td><input style="" class="span2"
+                      type="text" placeholder="" name="" id=""></td>
+                    <td><input style="" type="radio"
+                      placeholder="" name="isDefaultPar" value="mother"
+                      id="isDefaultParM"></td>
+                  </tr>
+                
+          <!--     Parent deatils for student  end*****-->
+
+
+                      </tbody>
+                    </table>
+
+
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div style="height: 15px;"></div>
+
+          <div style="height: 15px;"></div>
+          <div style="margin-left: 20%;">
+            <table>
+              <tr>
+
+                <td><input type="checkbox"></td>
+                <td><blockquote></blockquote></td>
+                <td><label>Is Active</label></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+              </tr>
+
+              <tr>
+                <td colspan="5">
+
+                  <div style="text-align: center;">
+                    <button type="button" id="saveID" name="saveID"
+                      style="margin-left: 20px;" class="btn btn-warning"
+                      onclick="getUsersList();return false;">Save Details</button>
+                    Ê
+                    <button type="button" id="resetID" name="resetID"
+                      style="margin-left: 10px;" class="btn btn-warning"
+                      onclick="resetFormHelp();return false;">Reset
+                      Details</button>
+                    Ê Ê
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div style="height: 20px;"></div>
+
+
+  <div style="height: 20px;"></div>
+
+
+
+  </div>
+  <!-- /container -->
+  
+  <script type="text/javascript">
+   jQuery('#registerDate').datetimepicker({
+            pickTime: false
+            }); 
+   jQuery('#joiningDate').datetimepicker({
+            pickTime: false
+            }); 
+   jQuery('#admissionDate').datetimepicker({
+            pickTime: false
+            }); 
+   jQuery('#dobDate').datetimepicker({
+            pickTime: false
+            }); 
+
+
+</script>
+
+</body>
+</html>

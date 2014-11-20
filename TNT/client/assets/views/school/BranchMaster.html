@@ -1,0 +1,230 @@
+
+
+<!-- Static navbar -->
+
+<div style="height:80px;"></div>
+<div class="reg_mainCon">
+  <form ng-submit="saveBranchMaster();" method="post" novalidate>
+    <fieldset>
+    <legend><img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Branch Details</legend>
+<div style="padding: 7px 20px 20px;">
+
+<span ng-show="saveSuccess"> Saved Branch Master Successfully</span>
+
+<table width="100%" cellspacing="0" cellpadding="11" border="0">
+            <tbody>
+              <tr>
+                <td>
+                  <input type="button" onclick="#" value="Edit Previous Branches" id="hidePurposeEdit" style="float: right;height: 30px" class="btn btn-warning">
+                </td>
+              </tr>
+            </tbody>
+</table>
+
+<table width="100%" cellspacing="0" cellpadding="11" border="0">
+            <tbody>
+<tr>
+                <td>
+                    <label style="color:#000;"><b>Regional Name</b></label>
+                    
+                </td>
+                <td>
+                   <select id='stateSelect' class="span4"  ng-model="branchMasterVO.regionalId"  ng-options="opt.regionalId as opt.regionalName for opt in regionalMastersList">
+                      </select> 
+                    
+                </td>
+            </tr>
+
+</tbody></table>
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+    <tbody>
+        <tr>
+                <td>
+                    <label style="color:#000;"><b>Branch Name</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.branchName">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Branch Code</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.branchCode">
+                </td>
+            </tr>
+
+        <tr>
+                <td>
+                    <label style="color:#000;"><b>Registration Number</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.registrationNumber">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Registration Date</b></label>
+                    <input type="date" placeholder="" class="span4" ng-model="branchMasterVO.registrationDate" >
+                </td>
+            </tr>
+   <tr>
+                <td>
+                    <label style="color:#000;"><b>Catagory Name</b></label>
+                    <select class="span3" id="catagorySelect" ng-model="branchMasterVO.categoryName">
+                        <option value="-1" selected="selected">Select</option>
+                        <option value="Kinder Garten">Kinder Garten</option>
+                        <option value="High School">High School</option>
+                      </select> 
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Management Type</b></label>
+                    <select class="span3" id="managementSelect" ng-model="branchMasterVO.managementType">
+                        <option value="-1" selected="selected">Select</option>
+                        <option value="Public">Public</option>
+                        <option value="Private">Private</option>
+                      </select> 
+                </td>
+            </tr>
+
+           <tr>
+                <td>
+                    <label style="color:#000;"><b>Min Education</b></label>
+                    <select class="span3" id="minEduSelect" ng-model="branchMasterVO.minimumEducation">
+                        <option value="-3" >Select</option>
+                        <option value="-2">Nursery</option>
+                        <option value="-1">LKG</option>
+                        <option value="0">UKG</option>
+                        <option value="1">Standard 1</option>
+                        <option value="2">Standard 2</option>
+                        <option value="3">Standard 3</option>
+                        <option value="4">Standard 4</option>
+                        <option value="5">Standard 5</option>
+                        <option value="6">Standard 6</option>
+                        <option value="7">Standard 7</option>
+                        <option value="8">Standard 8</option>
+                        <option value="9">Standard 9</option>
+                        <option value="10">Standard 10</option>
+                        <option value="11">Standard 11</option>
+                        <option value="12">Standard 12</option>
+                        
+                      </select> 
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Max Education</b></label>
+                    <select class="span3" id="maxEduSelect" ng-model="branchMasterVO.maximumEducation">
+                        <option value="-3" selected="selected" >Select</option>
+                        <option value="-2">Nursery</option>
+                        <option value="-1">LKG</option>
+                        <option value="0">UKG</option>
+                        <option value="1">Standard 1</option>
+                        <option value="2">Standard 2</option>
+                        <option value="3">Standard 3</option>
+                        <option value="4">Standard 4</option>
+                        <option value="5">Standard 5</option>
+                        <option value="6">Standard 6</option>
+                        <option value="7">Standard 7</option>
+                        <option value="8">Standard 8</option>
+                        <option value="9">Standard 9</option>
+                        <option value="10">Standard 10</option>
+                        <option value="11">Standard 11</option>
+                        <option value="12">Standard 12</option>
+                      </select> 
+                </td>
+            </tr>
+  <tr>
+                <td>
+                    <label style="color:#000;"><b>Contact Person</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.contactPerson">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Email</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.emailId">
+                </td>
+            </tr>
+   <tr>
+  <tr>
+                <td>
+                    <label style="color:#000;"><b>Landline N.O</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.phoneNumber">
+                </td>
+                <td>
+                    <label style="color:#000;"><b>Mobile N.O</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.mobileNumber">
+                </td>
+            </tr>
+   <tr>
+  <tr>
+                <td>
+                    <label style="color:#000;"><b>Fax </b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.fax">
+                </td>
+            </tr>
+   <tr>
+
+
+ </tbody></table>
+
+<label style="color:#000;"><b>Address</b></label>     
+      <textarea rows="3" style="width:87%;" ng-model="branchMasterVO.address"></textarea>  
+
+
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+
+<tr>
+                <td>
+                    <label style="color:#000;"><b>City</b></label>
+                    <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.city">
+                </td>
+<td>
+                    <label style="color:#000;"><b>Distict</b></label>
+                     <input type="text" placeholder="" class="span4" ng-model="branchMasterVO.district"> 
+                </td>
+
+              
+            </tr>
+
+
+            <tr>
+  <td>
+                    <label style="color:#000;"><b>Country</b></label>
+                    <select id='countrySelect' class="span3"  ng-model="branchMasterVO.country" ng-change="changeCountry(branchMasterVO.country)" ng-options="opt.countryId as opt.countryName for opt in countriesList">
+                       
+                      </select> 
+                </td>
+
+                <td>
+                    <label style="color:#000;"><b>State</b></label>
+                    <select id='stateSelect' class="span3"  ng-model="branchMasterVO.state" ng-change="changeState()" ng-options="opt.stateId as opt.stateName for opt in statesList">
+                        
+                      </select> 
+                </td>
+                
+            </tr>
+            <tr>
+<td>
+                    <label style="color:#000;"><b>Zip</b></label>
+                    <input type="text" placeholder=" " class="span4" ng-model="branchMasterVO.pinCode">
+                </td>
+
+               <td id="activeIDw">
+                    <label style="color:#000;"><b>Active</b></label> 
+                    <div style="background-image: url(&quot;./client/assets/images/checkboxSmall.jpg&quot;); width: 20px; height: 20px; cursor: pointer; background-position: 0px -20px;" class="styledCheckbox"><input type="checkbox" checked="checked" ng-model="branchMasterVO.activeFlag"  id="br_active" name="br_active" ></div>                   
+                    </td>
+            </tr>
+  
+<tr>
+             <td style="border:none;">
+                </td>
+            <td style="border:none;">&nbsp;</td>
+        </tr>
+            <tr>
+             <td style="border:none;">
+                <button class="btn" type="submit">Save changes</button>&nbsp;&nbsp;
+                <button class="btn" type="button">Cancel</button></td>
+            <td style="border:none;">&nbsp;</td>
+        </tr>
+        </tbody></table>
+
+    </div>
+
+    </fieldset>
+  </form>
+</div>
+<div style="height:20px;"></div>
+
+
