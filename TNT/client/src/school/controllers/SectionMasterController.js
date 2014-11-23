@@ -152,6 +152,8 @@
 				    });
     		};
     		
+    		
+    		//test
     		$scope.saveClassMaster = function(){
     			//$scope.regionalMasterVO.domainControls = [];
     			var branchMaster = {};
