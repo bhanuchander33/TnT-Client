@@ -152,7 +152,7 @@
 				    });
     		};
     		
-    		
+    		//test-vikas
     		//test
     		$scope.saveClassMaster = function(){
     			//$scope.regionalMasterVO.domainControls = [];
