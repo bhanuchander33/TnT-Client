@@ -176,6 +176,7 @@
     				    	$scope.fetchAllClassesByBranchAndRegion();
                 	
                 }).
+                //test -vikas
                 error(function(data, status, headers, config) {
                  // called asynchronously if an error test occurs
                  // or server returns response with an error status.
