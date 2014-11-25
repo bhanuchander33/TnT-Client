@@ -178,7 +178,7 @@
                 }).
                 //test -vikas
                 error(function(data, status, headers, config) {
-                 // called asynchronously if an error test occurs
+                 // called asynchronously if an error occurs
                  // or server returns response with an error status.
                 	$scope.saveSuccess = false;
                 	$log.info("error saving class master ");
