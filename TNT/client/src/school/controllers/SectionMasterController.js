@@ -58,68 +58,76 @@
     		
     		
     		//Fetching All classes for branchId and regionalId
-    		$scope.classesList = [];
-    		$scope.fetchAllClassesByBranchAndRegion = function(){
-
-    			var serUrl = app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_BRANCH_MAP_RESOURCE')+app.getConstantValueForKey('GETALL_CLASS_BRANCH_MAP');
-    			serUrl = serUrl+"?regionalId="+regionalId+"&branchId="+branchId;
+    		$scope.sectionsList = [];
+    		$scope.fetchAllSectionsByBranchAndRegionAndClass = function(){
+    			var classIdNew = $scope.classesId;
+    			var serUrl = app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_SECTION_MAP_RESOURCE')+app.getConstantValueForKey('GETALL_CLASS_SECTION_MAP');
+    			serUrl = serUrl+"?regionalId="+regionalId+"&branchId="+branchId+"&classId="+classIdNew;
 
     			$http({method: 'GET', url:serUrl}).
     			success(function(data, status, headers, config) {
     				//$log.info("Fetched ALL CLASSES "+JSON.stringify(data));
+    				
     				if(data != null){
-    					$scope.classesList = data;
-    					$scope.showClasses = true;
+    					$scope.sectionsList = data;
+    					$scope.showSections = true;
+    					
     				}else{
-    					$scope.showClasses = false;
+    					$scope.showSections = false;
     				}
-
-
     			}).
     			error(function(data, status, headers, config) {
     				// called asynchronously if an error occurs
     				// or server returns response with an error status.
-    				$scope.showClasses = false;
+    				$scope.showSections = false;
     			});
     		};
     		
-    		$scope.fetchAllClassesByBranchAndRegion();
+    		//$scope.fetchAllSectionsByBranchAndRegionAndClass();
     		
     		
-    		$scope.selectClassName = function(){
-    			$scope.selClassName = $('#selClassID option:selected').text();
-    			$log.info("selClassName ==> "+$scope.selClassName);
+    		$scope.selectSectionName = function(){
+    			$scope.selSectionName = $('#selSectionID option:selected').text();
+    			$log.info("selSectionName ==> "+$scope.selSectionName);
     		};
     		
+//    		$scope.selectSectionForClasses = function(){
+//    			$scope.selClasssName = $('#selClassesID option:selected').text();
+//    			$log.info("selClasssName ==> "+$scope.selClasssName);
+//    		};
     		
-    		$scope.reNameClass = function(branchClassId, className){
-    			$log.info("branchClassId ==>"+branchClassId+" classId ==> "+$scope.classId+" className==>"+className);
-    			$scope.branchClassId = branchClassId;
-    			 document.getElementById ("idConfirmDialogPromptReName").innerHTML = '<div style="font-size:18px;">Are you sure, you want to Rename this Class?</div>';
+    		$scope.reNameSection = function(sectionClassId, sectionName){
+    			$log.info("sectionClassId ==>"+sectionClassId+" sectionId ==> "+$scope.sectionId+" sectionName==>"+sectionName);
+    			$scope.sectionClassId = sectionClassId;
+    			 document.getElementById ("idConfirmDialogPromptReName").innerHTML = '<div style="font-size:18px;">Are you sure, you want to Rename this Section?</div>';
     		      //confirmDialogCallback = callback;
     		      $("#idConfirmDialogReName").modal ("show");
     		      
-    		      $('#newClassName').val("");
-    		      $('#oldClassName').val(className);
+    		      $('#newSectionName').val("");
+    		      $('#oldSectionName').val(sectionName);
     			
     		};
     		
-    		$scope.updateClassName = function(){
+    		$scope.updateSectionName = function(){
     			$("#idConfirmDialogReName").modal ('hide'); 
     			
-    			var classMasterObj = {}, branchMaster = {};
-    			classMasterObj.className = $scope.newClassName;
-    			classMasterObj.regionalId = regionalId;
-    			classMasterObj.branchClassId = $scope.branchClassId;
+    			var sectionMasterObj = {}, classMaster = {}, branchMaster = {};
+    			sectionMasterObj.sectionName = $scope.newSectionName;
+    			sectionMasterObj.regionalId = regionalId;
+    			sectionMasterObj.sectionClassId = $scope.sectionClassId;
+    			sectionMasterObj.updatedBy = "1";//for now hardcoded
     			
-    			branchMaster.branchClassId = branchId;
-    			classMasterObj.branchMaster = branchMaster;
+    			classMaster.classId = $scope.classesId;
+    			sectionMasterObj.classMaster = classMaster;
     			
-    			$http({method: 'PUT', url:  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_BRANCH_MAP_RESOURCE'),
-				    data:JSON.stringify(classMasterObj)}).
+    			branchMaster.branchId = branchId;
+    			sectionMasterObj.branchMaster = branchMaster;
+    			
+    			$http({method: 'PUT', url:  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_SECTION_MAP_RESOURCE'),
+				    data:JSON.stringify(sectionMasterObj)}).
 				    success(function(data, status, headers, config) {
 				    	
-				    	$scope.fetchAllClassesByBranchAndRegion();
+				    	$scope.fetchAllSectionsByBranchAndRegionAndClass();
             	
 				    }).
 				    error(function(data, status, headers, config) {
@@ -130,19 +138,31 @@
     			
     		};
     		
-    		$scope.cancelUpdateClassName = function(){
+    		$scope.cancelUpdateSectionName = function(){
     			$("#idConfirmDialogReName").modal ('hide'); 
     		};
     		
-    		$scope.disableClass = function(branchClassId){
-    			$log.info("branchClassId == > "+branchClassId);
-    			var delUrl =  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_BRANCH_MAP_RESOURCE')+app.getConstantValueForKey('DELETE_CLASS_BRANCH_MAP');
-    			delUrl = delUrl+'?classBranchMapId='+branchClassId;
+    		  
+    		$scope.disableSection = function(sectionClassId){
+
+      			$scope.sectionClassId = sectionClassId;
+      			 document.getElementById ("idConfirmDialogPrompt").innerHTML = '<div style="font-size:18px;">Are you sure, you want to Disable this Section?</div>';
+      		      //confirmDialogCallback = callback;
+      		      $("#idConfirmDialog").modal ("show");
+    		}
+    		
+    		$scope.disableSectionAfterConfirmName = function(){
+    			
+    			$("#idConfirmDialog").modal ('hide'); 
+    			
+    			$log.info("sectionClassId == > "+$scope.sectionClassId);
+    			var delUrl =  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_SECTION_MAP_RESOURCE')+app.getConstantValueForKey('DELETE_CLASS_SECTION_MAP_BYID');
+    			delUrl = delUrl+'?classSectionMapId='+$scope.sectionClassId;
     			
     			$http({method: 'DELETE', url: delUrl}).
 				    success(function(data, status, headers, config) {
 				    	
-				    	$scope.fetchAllClassesByBranchAndRegion();
+				    	$scope.fetchAllSectionsByBranchAndRegionAndClass();
             	
 				    }).
 				    error(function(data, status, headers, config) {
@@ -151,47 +171,51 @@
 				    	$log.info("error deleting class master ");
 				    });
     		};
-    		//agian bhanu2
     		
-    		//again bhanu
-    		//test-vikas
-    		//test
-    		$scope.saveClassMaster = function(){
-    			//$scope.regionalMasterVO.domainControls = [];
-    			var branchMaster = {};
-    			$scope.classMasterVO = {};
-    			$scope.classMasterVO.createdDateTime = new Date();
-    			$scope.classMasterVO.createdBy = 1;
-    			$scope.classMasterVO.className = $scope.selClassName;
-    			$scope.classMasterVO.classId = $scope.classId;
-    			$scope.classMasterVO.regionalId = regionalId;
+    		$scope.cancelUpdateSectionName = function(){
+    			$("#idConfirmDialog").modal ('hide'); 
+    		};
+    		
+    		
+    		$scope.saveSectionMaster = function(){
+
+    			var branchMaster = {},
+    			classMaster = {};
+    			$scope.sectionMasterVO = {};//why scope variable here????
+    			
+    			
+    			$scope.sectionMasterVO.createdBy = 1;//hardcodded
+    			$scope.sectionMasterVO.updatedBy = 1;//hardcodded
+    			$scope.sectionMasterVO.activeFlag = true;
+    			$scope.sectionMasterVO.sectionName = $scope.selSectionName;
+    			//$scope.sectionMasterVO.sectionId = $scope.sectionId;
+    			$scope.sectionMasterVO.regionalId = regionalId;
+    			
+    			classMaster.classId = $scope.classesId;
+    			$scope.sectionMasterVO.classMaster = classMaster;
     			
     			branchMaster.branchId = branchId;
-    			$scope.classMasterVO.branchMaster = branchMaster;
+    			$scope.sectionMasterVO.branchMaster = branchMaster;
     			
     			
-    			$http({method: 'POST', url:  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_BRANCH_MAP_RESOURCE'),
-    				    data:JSON.stringify($scope.classMasterVO)}).
+    			$http({method: 'POST', url:  app.getConstantValueForKey('API_URL')+app.getConstantValueForKey('CLASS_SECTION_MAP_RESOURCE'),
+    				    data:JSON.stringify($scope.sectionMasterVO)}).
     				    success(function(data, status, headers, config) {
                 	
     				    	//$log.info("saved class master "+JSON.stringify(data));
     				    	$scope.saveSuccess = true;
-    				    	$scope.classMasterVO = {};
-    				    	$scope.fetchAllClassesByBranchAndRegion();
+    				    	$scope.sectionMasterVO = {};
+    				    	$scope.fetchAllSectionsByBranchAndRegionAndClass();
                 	
                 }).
                 error(function(data, status, headers, config) {
                  // called asynchronously if an error occurs
                  // or server returns response with an error status.
                 	$scope.saveSuccess = false;
-                	$log.info("error saving class master ");
+                	$log.info("error saving section master ");
                 });
     			
     		};
-    		
-    		
-    		//alert("$rootScope.reloadCount in salesAdmin : "+app.retrieveFromLocalStorage(constants.RELOAD_COUNT));
-
     	};
 
         // Register as global constructor function

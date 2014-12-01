@@ -18,12 +18,13 @@
            "school/controllers/BranchMasterController",
            "school/controllers/ClassMasterController",
            "school/controllers/SectionMasterController",
-           "school/controllers/StudentController"
+           "school/controllers/StudentController",
+           "school/controllers/SMSComunicationController"
            
             
         ],
         function ( MainController, RegionalMasterController,BranchMasterController, ClassMasterController,
-        		  SectionMasterController, StudentController)
+        		  SectionMasterController, StudentController,SMSComunicationController)
         {
             var moduleName = "TNT.School";
 
@@ -34,8 +35,9 @@
                 .controller("BranchMasterController",BranchMasterController)
                 .controller("ClassMasterController",ClassMasterController)
                 .controller("SectionMasterController",SectionMasterController)
-                .controller("StudentController",StudentController);
-               
+                .controller("StudentController",StudentController)
+            	.controller("SMSComunicationController",SMSComunicationController);
+            
 
             return moduleName;
         });

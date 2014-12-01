@@ -23,11 +23,12 @@
             'school/controllers/BranchMasterController',
             'school/controllers/ClassMasterController',
             'school/controllers/SectionMasterController',
-            'school/controllers/StudentController'
+            'school/controllers/StudentController',
+            'school/controllers/SMSComunicationController'
            ],
             function ( $log, AuthenticationController, AdminDashboardController,MainController,
             		RegionalMasterController, BranchMasterController, ClassMasterController, 
-            		SectionMasterController, StudentController)
+            		SectionMasterController, StudentController,SMSComunicationController)
 
 
         			{
@@ -76,7 +77,10 @@
                       templateUrl : "./client/assets/views/school/StudentDetails.html",
                       controller  : "StudentController"
                    })
-                   
+                   .when( '/smsCommunication', {
+                      templateUrl : "./client/assets/views/school/SMSComunication.html",
+                      controller  : "SMSComunicationController"
+                   })
                    
                     .otherwise({
                         redirectTo  : '/login'

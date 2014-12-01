@@ -13,7 +13,7 @@ define(function() {
 		'REGIONAL_RESOURCE' : 'regionalResource',
 		'BRANCH_RESOURCE' : 'branchResource',
 		'CLASS_BRANCH_MAP_RESOURCE' : 'classBranchMapResource',
-		'CLASS_SECTION_MAP_RESOURCE' : 'classSectionMapResource',
+		'CLASS_SECTION_MAP_RESOURCE' : 'classSectionMapResource',//1
 
 		// Define the action part of url here
 		'GETALLCATEGORIES' : 'getAllCategories',
@@ -22,6 +22,10 @@ define(function() {
 		'GETALL_CLASS_BRANCH_MAP' : '/getAllClassBranchMaps',
 		'DELETE_CLASS_BRANCH_MAP' : '/deleteClassBranchMapById',
 		'GETALL_CLASS_SECTION_MAPS' :'getAllClassSectionMaps',
+		
+		'GETALL_CLASS_SECTION_MAP' : '/getAllClassSectionMaps',//2
+		'DELETE_CLASS_SECTION_MAP_BYID' : '/deleteClassSectionMapById',//3
+
 		
 		
 		// Define the other constants here
