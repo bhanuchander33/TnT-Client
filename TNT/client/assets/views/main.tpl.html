@@ -4,15 +4,19 @@
 
   <script src="./client/assets/js/bootstrap-jquery.js"></script>
   <script src="./client/assets/js/bootstrap.js"></script>
-<script type="text/javascript" src="./client/assets/js/bootstrap-radio.js"></script>
+<script src="./client/assets/js/bootstrap-radio.js"></script>
+<script src="./client/assets/js/bootstrap-datetimepicker.min.js"> </script>
+<script src="./client/assets/js/bootstrap-datetimepicker.pt-BR.js"> </script>
+<script src="./client/assets/js/bootstrap-fileupload.js" ></script>
+
 <meta charset="utf-8">
 <title>Welcome to TracknTune</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
+<link href="./client/assets/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="./client/assets/css/bootstrap-responsive.css" rel="stylesheet" media="screen">
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -34,16 +38,26 @@
   <script type="text/javascript">
    $(function(){
       $('input:checkbox').screwDefaultButtons({
-        image: 'url("img/checkboxSmall.jpg")',
+        image: 'url("./client/assets/images/checkboxSmall.jpg")',
         width: 20,
         height: 20
       });
         });
+
+
+   $('input:radio').screwDefaultButtons({
+      image: 'url("./client/assets/img/radioSmall.jpg")',
+      width: 20,
+      height: 20
+    });
+ jQuery("#radioSmsType").prop('checked',false);
+   
   </script>
 
 </head>
 <body>
 <div ng-controller="MainController">
+
 <!-- Static navbar -->
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -53,22 +67,7 @@
     
 
       <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="nav-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul>
+        
         <ul class="nav pull-right">
           <li class="active"><a href="#">Admin</a></li>
           <li><a href="#">Logout</a></li>
@@ -78,14 +77,93 @@
     </div>
   </div>
 </div>
+
 <div style="height:80px;"></div>
+
+<div class="navbar navbar-top"><!--  style="border-radius: 6px 6px 6px 6px;" -->
+  <div class="navbar-inner">
+    <div class="container">
+     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+     <span class="icon-bar"></span> <span class="icon-bar"></span> 
+     <span class="icon-bar"></span> </a>           
+      <div class="nav-collapse collapse">
+          <ul class="nav" id="dynamic_menu">
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">Regional Setup 
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="#/newRegionalMaster">Regional</a>
+                      </li>
+                      <li>
+                          <a href="#/newBranchMaster">Branch</a>
+                      </li>
+                      <li>
+                          <a href="#/newClassMaster">Class</a>
+                      </li>
+                      <li>
+                          <a href="#/newSectionMaster">Section</a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);">Staffs</a><!-- not ready -->
+                      </li>
+                      <li>
+                          <a href="#/addStudent">Students</a>
+                      </li>
+                      <li>
+                          <a href="http://localhost:8080/TN-HTMLFROMTRIX/ParentDetails.html">Parents</a><!-- not ready -->
+                      </li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">Communication 
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="javascript:void(0);">View Notification</a>
+                      </li>
+                      <li>
+                          <a href="#/smsCommunication">View SMS</a>
+                      </li>
+                      <li>
+                          <a href="javascript:void(0);">Email Campaign</a>
+                      </li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);">Bulk Upload 
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      
+                      <li>
+                          <a href="http://localhost:8080/TN-HTMLFROMTRIX/StudentDetailsUpload.html">Upload Student Master</a>
+                      </li>
+                  </ul>
+              </li>
+             <!--  <li>
+                  <a href="Access.action?p1=AppStore&amp;p2=SA_inst2">App Store</a>
+              </li>
+              <li>
+                  <a href="Access.action?p1=comeSoon&amp;p2=SA_inst2">Knowledge Base</a>
+              </li> -->
+          </ul>
+      </div>
+  </div>
+   </div>
+ </div>
+ 
+<div style="height:20px;"></div>
 <div ng-view>
 
 </div>
 <div style="height:20px;"></div>
 
 <!-- /container -->
-<footer class="footer" style="position:fixed;bottom:0px;width:100%;">
+<footer class="footer" style="bottom:0px;width:100%;">
+<!-- <footer class="footer" style="position:fixed;bottom:0px;width:100%;"> -->
   <div class="container">
     <p class="pull-right"><a href="#">Back to top</a></p>
     <ul class="footer-links">

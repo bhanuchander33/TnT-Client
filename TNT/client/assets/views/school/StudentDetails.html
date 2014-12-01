@@ -68,12 +68,6 @@ input.span2 {
 </style>
 
 <script type="text/javascript">
-   $(function(){
-      $('input:checkbox').screwDefaultButtons({
-        image: 'url("./client/assets/img/checkboxSmall.jpg")',
-        width: 20,
-        height: 20
-      });
 
      $('input:radio').screwDefaultButtons({
         image: 'url("./client/assets/img/radioSmall.jpg")',
@@ -96,8 +90,7 @@ input.span2 {
 
 </head>
 <body>
-  
-  <div style="height: 80px;"></div>
+
   <div class="reg_mainCon">
     <form>
       <fieldset>
@@ -639,12 +632,12 @@ input.span2 {
                     <button type="button" id="saveID" name="saveID"
                       style="margin-left: 20px;" class="btn btn-warning"
                       onclick="getUsersList();return false;">Save Details</button>
-                    Ê
+                    
                     <button type="button" id="resetID" name="resetID"
                       style="margin-left: 10px;" class="btn btn-warning"
                       onclick="resetFormHelp();return false;">Reset
                       Details</button>
-                    Ê Ê
+                    
                   </div>
                 </td>
               </tr>

@@ -1,170 +1,187 @@
-<!DOCTYPE html>
 <html>
 <head>
 
-  <script src="js/bootstrap-jquery.js"></script>
-  <script src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/bootstrap-radio.js"></script>
-<meta charset="utf-8">
-<title>Welcome to TracknTune</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- Bootstrap -->
-<link href="css/bootstrap.css" rel="stylesheet" media="screen">
-<link href="css/bootstrap-responsive.css" rel="stylesheet" media="screen">
-<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-<!--fav and touch icons -->
-<link rel="shortcut icon" href="../../docs/assets/ico/favicon.ico">
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+ 
 
  <style type="text/css">
       .styledRadio {
       display: inline-block;
     }
+
+  //
+   #idConfirmDialogReName {
+        width: 450px;
+        height: 165px;
+        background-color: whitesmoke;
+        }
+       #idConfirmDialogReName .btn {
+        width: 70px;
+        margin-bottom: 8px;
+        margin-right: 15px;
+        margin-top: 80px;
+        float: right;
+        }
+       #idConfirmDialogReName h3 {
+        margin-left: 60px;
+        margin-top:15px;
+        }
+       #idConfirmDialogReName img {
+        float: left;
+        margin-left: 15px;
+        margin-top: 25px;
+        }
+
+ #idConfirmDialog {
+        width: 450px;
+        height: 165px;
+        background-color: whitesmoke;
+        }
+       #idConfirmDialog .btn {
+        width: 70px;
+        margin-bottom: 8px;
+        margin-right: 15px;
+        margin-top: 80px;
+        float: right;
+        }
+       #idConfirmDialog h3 {
+        margin-left: 60px;
+        margin-top:15px;
+        }
+       #idConfirmDialog img {
+        float: left;
+        margin-left: 15px;
+        margin-top: 25px;
+        }
     
-/*.span3 {
-    width: 310px;
-}
-*/
     </style>
 
   <script type="text/javascript">
-   $(function(){
-      $('input:checkbox').screwDefaultButtons({
-        image: 'url("img/checkboxSmall.jpg")',
-        width: 20,
-        height: 20
+  
+
+    function reNameSection(idForReName,nameForReName) {
+      confirmDialogReName ('<div style="font-size:18px;">Are you sure, you want to Rename this Section?</div>', alert);
+      //req hideen input for old class id?
+      jQuery('#newSectionName').val("");
+      jQuery('#oldSectionName').val(nameForReName);
+      jQuery('#hiddenClassID').val(idForReName);
+    }
+
+     function disableSection(idForReName,nameForReName) {
+      confirmDialog ('<div style="font-size:18px">Are you sure, you want to disable this Section?</div>', alert);
+      //jQuery('#hiddenClassID').val(idForReName);
+    }
+    
+    function disableClassAfterConfirm(){
+      var oldClassID =jQuery('#hiddenClassID').val(); 
+      var schoolNames = jQuery("#schoolNames").val();
+      var branchNames = jQuery("#branchNames").val();//feature purpose
+      ClassMasterDWR.disableCLassMaster(branchNames,oldClassID,function(data) {
+            if(data == "success"){
+              setError("schoolNames","Success");
+              classMasterLoadDisplay();
+            }else   if(data == "notexist"){
+              setError("schoolNames","Section Name  Not Exist");
+            }else{
+            setError('schoolNames', "Fail");
+          }   
       });
-        });
+      
+    }
+
+  function closeConfirmDialogReName () {
+      $("#idConfirmDialogReName").modal ('hide'); 
+      };
+    function okConfirmDialogReName () {
+      $("#idConfirmDialogReName").modal ('hide'); 
+     // reNameClassAfterConfirm();//need integration
+      };
+    function confirmDialogReName (prompt, callback) {
+      document.getElementById ("idConfirmDialogPromptReName").innerHTML = prompt;
+      //confirmDialogCallback = callback;
+      $("#idConfirmDialogReName").modal ("show");
+      }
+
+ function closeConfirmDialog () {
+      $("#idConfirmDialog").modal ('hide'); 
+      };
+    function okConfirmDialog () {
+      $("#idConfirmDialog").modal ('hide'); 
+      disableClassAfterConfirm();
+      };
+    function confirmDialog (prompt, callback) {
+      document.getElementById ("idConfirmDialogPrompt").innerHTML = prompt;
+      confirmDialogCallback = callback;
+      $("#idConfirmDialog").modal ("show");
+      }
+
   </script>
 
 </head>
 <body>
 <!-- Static navbar -->
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    
 
-    <div class="container"><a class="brand" href="#"><span style="color:#ec7717;">Track</span><span style="color:#000;">nTune</span> </a>
-    
 
-      <div class="nav-collapse collapse">
-        <ul class="nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li class="nav-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-        <ul class="nav pull-right">
-          <li class="active"><a href="#">Admin</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-  </div>
-</div>
-<div style="height:80px;"></div>
+<div style=""><span id ="errorspan" style="color:red;font-size: 14px;font-weight: bold;" >&nbsp;</span></div>
 <div class="reg_mainCon">
-
+  <form>
     <fieldset>
-    <legend><img src="img/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Section Details</legend>
+    <legend><img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Section Details</legend>
 <div style="padding: 7px 20px 20px;">
-
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-                <td><label style="color:#000;"><b>Select Regional</b></label></td>
-                <td><select class="span3"  name="schoolNames" id="schoolNames" onchange="selectSchoolforBranches(this.value);">
-                        <option value="-1" selected="selected">Select</option>                       
-                       </select>                   
-                 </td>
-                <td><label style="color:#000;"><b>Select Branch</b></label></td>
-                <td><select class="span3" name="branchNames" id="branchNames" onchange="selectBranchesforClasses();">
-                        <option value="-1" selected="selected">Select</option>                      
-                       </select>                   
-                 </td>
-        </tr>
-            <tr>
+<span ng-hide="saveSuccess">Failed to add new section</span>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
                 <td><label style="color:#000;"><b>Select Class</b></label></td>
-                <td><select class="span3"  name="classNames" id="classNames" onchange="selectSectionForClasses();">
-                        <option value="-1" selected="selected">Select</option>                       
+                <td><select class="span3"  name="classNames"  ng-model="classesId" ng-change="fetchAllSectionsByBranchAndRegionAndClass();"  id="selClassesID" >
+                        <option value="-1" selected="selected">Select</option> 
+                        <option value="0">UKG</option>
+                        <option value="1">Standard 1</option>
+                        <option value="2">Standard 2</option>
+                        <option value="3">Standard 3</option>                      
                        </select>                   
                  </td>
         </tr>
      <tr><td colspan="4"><label style="color:#000; text-align:center; font-size:18px; line-height:28px;"><b>Create New Section</b></label></td></tr>
     <tr>
-          <td colspan="4" style="text-align: center;"><div style="display: inline-block;"><label style="color:#000;"><b>Section Name</b></label></div>
+          <td colspan="4" style="text-align: center;">
+          <div style="display: inline-block;"><label style="color:#000;"><b>Section Name</b></label></div>
           <div align="left" style="display: inline-block;">
-           <!--    <input class="span3" type="text" placeholder="" id='newSectionID' name='newSectionID'> -->
-
-  <select class="span3" name="branchNames" id="newSectionID" onchange="#">
-                        <option value="-1" selected="selected">Select</option>    
-                        <option value="1" >A</option>     
-                        <option value="2" >B</option> 
-                        <option value="3" >C</option> 
-                        <option value="4" >D</option>                     
-                        <option value="5" >Master</option> 
-                        <option value="6" >Junior</option> 
-                        <option value="7" >Sec-1</option> 
-                        <option value="9" >Sec-2</option> 
-                        <option value="8" >Sec-3</option> 
-                       </select>    
-
-
-        <div style='display:inline-block;'><i onclick='addNewSection();' style='margin-top: -4px;'  class="icon-plus"></i></div>
+              
+              <select class="span3" name="branchNames" ng-model="sectionId" ng-change="selectSectionName();" id="selSectionID">
+                        <option value="-3" selected="selected" >Select</option>
+                        <option value="-2">Sec-3</option>
+                        <option value="-1">Sec-2</option>
+                        <option value="0">Sec-1</option>
+                        <option value="1">A</option>
+                        <option value="2">B</option>
+                        <option value="3">C</option>
+                       </select>      
+               <!-- <input class="span3" type="text" placeholder="" id='newClassID' name='newClassID'> -->
+          <div style='display:inline-block;'><a href="javascript:void(0);" ng-click='saveSectionMaster();' style='margin-top: -4px;'  class="icon-plus"></a></div>
              <!--  <button type="button" class="btn">Add</button> -->
             </div></td>
         </tr>
       </table>
     </div>
     
-  <div id="classAreaID" style="line-height:50px; text-align:center; font-size:14px; color:#666666;">
+  <div id="sectionAreaID" style="line-height:50px; text-align:center; font-size:14px; color:#666666;">
 
 
-<table class="table table-bordered" width="100%" style="margin-bottom:0px;">
+<table class="table table-bordered" width="100%" style="margin-bottom:0px;" ng-show="showSections" >
                   
                 <tr><th style="text-align: center;">Section Name</th><th style="text-align: center;">Rename</th><th style="text-align: center;">Disable</th></tr>
-                     <tr  >
-                           <td style="text-align: center;">Section 1</td>
+                     <tr ng-show="showSections" ng-repeat="cls in sectionsList">
+                           <td style="text-align: center;">{{cls.sectionName}}</td>
                            <td style="text-align: center;">
-                          <a href="#" onclick="#" >
+                          <a href="javascript:void(0);" ng-click="reNameSection(cls.sectionClassId, cls.sectionName)" >
                           <i class="icon-edit"></i></a></td>
-                          <td style="text-align: center;"><a href="#" onclick="#" ><i class="icon-trash"></i> </a></td>
+                          <td style="text-align: center;"><a href="javascript:void(0);" ng-click="disableSection(cls.sectionClassId)" ><i class="icon-trash"></i></a></td>
                           </tr>
-                        <tr  >
-                         <tr  >
-                           <td style="text-align: center;">Section 2</td>
-                           <td style="text-align: center;">
-                          <a href="#" onclick="#" >
-                          <i class="icon-edit"></i></a></td>
-                          <td style="text-align: center;"><a href="#" onclick="#" ><i class="icon-trash"></i> </a></td>
-                          </tr>
-                        <tr  >
-                        <td colspan="3" style="color:red;font-size:16px;font-weight:bold;text-align: center;background-color:silver ">No Sections Found</td></tr>
-                    
-                        
                 </table>
-
-
-
-
+		<table class="table table-bordered" width="100%" style="margin-bottom:0px;" ng-hide="showSections" id="testTable">
+		<tr>
+		<td colspan="3" style="color:red;font-size:16px;font-weight:bold;text-align: center;background-color:silver ">No Classes Found</td>													
+		</tr>
+		</table>
   </div>
     
   <div style="padding-bottom: 11px;"></div>
@@ -172,23 +189,34 @@
 
 
     </fieldset>
-
+  </form>
 </div>
 <div style="height:20px;"></div>
 </div>
 <!-- /container -->
-<footer class="footer" style="position:fixed;bottom:0px;width:100%;">
-  <div class="container">
-    <p class="pull-right"><a href="#">Back to top</a></p>
-    <ul class="footer-links">
-      <li><a href="http://blog.getbootstrap.com">Blog</a></li>
-      <li class="muted">·</li>
-      <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Issues</a></li>
-      <li class="muted">·</li>
-      <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
-    </ul>
-  </div>
-</footer>
-<script src="js/bootstrap.js"></script>
+
+   <div id="idConfirmDialogReName" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <img src="./client/assets/images/alert.gif"  width="34" height="28" alt="confirm icon" /><h3 id="idConfirmDialogPromptReName"></h3>
+        <div style="text-align: center;">
+          <label style="color:#000;">Old:</label><input disabled="disabled" type="text" class="span2" id='oldSectionName' />
+          <label style="color:#000;">New:</label><input type="text" class="span2" id='newSectionName' ng-model="newSectionName" />
+        </div>
+        <br/>
+        <div >
+          <a href="javascript:void(0);" class="btn btn-primary" style="margin-top: 0px;" ng-click="updateSectionName();">Yes</a>
+          <a href="javascript:void(0);" class="btn" style="margin-top: 0px;" ng-click="cancelUpdateSectionName();">No</a>
+      </div>
+      </div>
+      
+     <div id="idConfirmDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+      <img src="./client/assets/images/alert.gif"  width="34" height="28" alt="confirm icon" />
+      <h3 id="idConfirmDialogPrompt"></h3>
+        <div >
+          <a href="javascript:void(0);" class="btn btn-primary" style="margin-top: 0px;" ng-click="disableSectionAfterConfirmName();">Yes</a>
+          <a href="javascript:void(0);" class="btn" style="margin-top: 0px;" ng-click="cancelDisableSectionName();">No</a>
+      </div>
+      </div>    
+
+
 </body>
 </html>

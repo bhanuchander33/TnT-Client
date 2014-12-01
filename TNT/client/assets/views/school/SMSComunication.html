@@ -1,0 +1,1518 @@
+
+<style type="text/css">
+.styledRadio {
+	display: inline-block;
+}
+
+.close {
+	float: none;
+}
+
+.example_box {
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #f1f1f1;
+	padding: 1%;
+	width: 98%;
+	float: left;
+	background: #FFB547;
+	line-height: 22px;
+	color: #000
+}
+
+.preview_box {
+	margin: 0px 0px 10px 0px;
+	border: 1px solid #f1f1f1;
+	padding: 1%;
+	width: 98%;
+	float: left;
+	background: #FFE1B5;
+	line-height: 22px;
+	color: #000
+}
+
+.boxed {
+	border: 1px solid #F0EFE3;
+	padding: 11px;
+	padding-bottom: 5px;
+}
+
+.sms_textarea {
+	margin: 0 0 0px 0px;
+	padding: 0 0 15px 0px;
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #ccc;
+}
+
+.sms_head {
+	margin: 0px;
+	padding: 10px 0;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: bold;
+	color: #323232;
+	width: 100%;
+	float: left;
+}
+
+.sms_textbox {
+	margin: 0px;
+	padding: 1%;
+	width: 97.5%;
+	height: 75px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	resize: none;
+}
+
+.length {
+	margin: 0px;
+	padding: 1%;
+	text-align: right;
+	width: 97.8%;
+	/*font-size: 14px;*/
+	float: left; . special { background : -moz-linear-gradient( center top,
+	#e7e7e7 0%, #d1d1d1 100%) repeat scroll 0 0 rgba( 0, 0, 0, 0);
+	color: #515151;
+	font-size: 14px;
+	height: 30px;
+	line-height: 20px;
+	margin: 0;
+	padding: 3px 8px;
+	text-align: center;
+	white-space: pre-line;
+}
+
+.TogglerHaderALL .open .forChrome {
+	/*   background-color: #F5F5F5; */
+	background-image: url("./client/assets/img/icon_minus.gif");
+	background-position: 3px 4px;
+	background-repeat: no-repeat;
+	/* border: 1px solid #CCCCCC; */
+	color: #000000;
+	cursor: pointer;
+	display: block;
+	line-height: 22px;
+	padding-left: 20px;
+	text-align: left;
+	text-decoration: none;
+	/*width: 500px;*/
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.TogglerHaderALL .close .forChrome {
+	/*  background-color: #F5F5F5; */
+	background-image: url("./client/assets/img/icon_plus.gif");
+	background-position: 3px 4px;
+	background-repeat: no-repeat;
+	/*  border: 1px solid #CCCCCC; */
+	color: #000000;
+	cursor: pointer;
+	display: block;
+	line-height: 22px;
+	padding-left: 20px;
+	text-align: left;
+	text-decoration: none;
+	/* width: 500px;*/
+	font-size: 21px;
+	font-weight: bold;
+}
+
+.span3 {
+	width: 270px;
+}
+
+input.span2 {
+	width: 85%;
+}
+</style>
+
+<script type="text/javascript">
+
+   //radioSmsTypeTrans-radioSmsTypePromo
+
+       function showTogglerBodyAll(togID){//pass id ..if u want more ....
+/*        function showTogglerBodyAll(fromWhere,togID){//pass id ..if u want more .... */
+           var toggleiD = "#"+togID;
+           var toggleiDA = "";
+            toggleiDA  = "#A"+togID;        
+              jQuery(toggleiD).toggle('slow');
+              jQuery(jQuery(toggleiDA).children()[0]).toggleClass("open close");  
+      } 
+
+function limiter(){
+    var tex = document.smsForm.smsbody.value;
+    var len = tex.length;
+    var maxlimit =160;
+ if (len > maxlimit){
+    
+    $("#messageExceedsTdId").css('display','');
+    $("#noOfCharsTdId").css('display','none');
+  
+    // otherwise, update 'characters left' counter
+  }else{
+      //cntfield.value = maxlimit - field.value.length;
+  document.smsForm.limit.value = maxlimit-len;
+
+      $("#messageExceedsTdId").css('display','none');
+      $("#noOfCharsTdId").css('display','');
+  }
+
+
+  }
+
+var checkedStudent = 0;
+function checkBoxCounter(currentElement) {
+
+      checkedStudent = parseInt($('#checkCount').val());
+
+      if(currentElement.checked==true){
+         checkedStudent = checkedStudent +1;
+        $('#checkCount').val(checkedStudent <=0 ? 0 : checkedStudent );
+      }else{
+         checkedStudent = checkedStudent -1;
+         $('#checkCount').val(checkedStudent <=0 ? 0 : checkedStudent );
+      }     
+}
+
+
+
+function selectedSMSType(val){
+
+        jQuery("#templateView").hide();
+        jQuery("#buttonDivId").hide();
+        jQuery("#dynamicGrid").hide();
+        jQuery("#submitFinal").hide();
+
+        jQuery("#classListDivID").hide();
+        jQuery("#studentClassSection").hide();
+
+          //Staff
+        jQuery("#staffSlectionDepart").hide();
+         jQuery("#staffListDivID").hide();
+
+        if(val=='trans'){
+            //jQuery("#selectClass").val("-1").attr('selected',true);
+
+            jQuery("#promotionalID").hide();
+
+            jQuery("#studentClassSection").hide();
+            jQuery("#staffSlectionDepart").hide();
+            jQuery("#dynamicGrid").hide();
+           
+            jQuery("#noOfCantacts").hide();
+
+            jQuery("#transactionalDivID").show();
+
+        }else{//promo
+            jQuery("#transactionalDivID").hide();
+            jQuery("#promotionalID").show();
+
+        }
+}
+
+function selectTemplateforSMSFor (passedValue) {//option value getting null..will check
+
+        jQuery("#templateView").hide();
+        jQuery("#buttonDivId").hide();
+        jQuery("#studentClassSection").hide();
+        jQuery("#classListDivID").hide();
+        jQuery("#dynamicGrid").hide();
+        jQuery("#submitFinal").hide();
+        // <option value="1">Individual</option>
+        //<option value="2">Bulk</option>
+
+        //Staff
+        jQuery("#staffSlectionDepart").hide();
+         jQuery("#staffListDivID").hide();
+
+        var smsTemplateSelectionList = document.getElementById('smsTemplateSelection'); 
+
+        var data = "[ {\"1\":\"Test-1\"}]";//testing purpose only..josn response will chnge
+
+        var smsFormatJson = jQuery.parseJSON(data);
+
+        removeAllOptions('smsTemplateSelection');
+
+        for(var i = 0; i < smsFormatJson.length; i++) {
+          var opt = document.createElement("option");
+          var temp = smsFormatJson[i];
+          //  alert(temp + "---"+temp[0]);
+          opt.value = temp[0];
+          opt.innerHTML = temp[1];
+          smsTemplateSelectionList.appendChild(opt);
+        }
+}
+
+function fetchDisplayTemplate (passedValue) {
+ // alert(passedValue+"**fetchDisplayTemplate");
+ 
+    //fetch the tepltes from db based on "passedValue"
+
+      jQuery("#studentClassSection").hide();
+      jQuery("#classListDivID").hide();
+      jQuery("#dynamicGrid").hide();
+      jQuery("#submitFinal").hide();
+
+        //Staff
+        jQuery("#staffSlectionDepart").hide();
+         jQuery("#staffListDivID").hide();
+
+      jQuery("#templateView").show();
+      jQuery("#buttonDivId").show();
+
+      jQuery("#exampleMsgID").html("exampleMsgID");
+      jQuery("#previewMsgID").html("previewMsgID");
+      jQuery("#templateBody").html("templateBody");
+      }
+
+function removeAllOptions(whichOption)   {
+
+      var listofSubjects =  document.getElementById(whichOption);
+        var i;
+        for(i=listofSubjects.options.length-1;i>=0;i--)
+        {
+        listofSubjects.remove(i);
+        }
+        
+         var opt = document.createElement("option");
+          opt.value = "-1";
+          opt.innerHTML = "--Select--";
+          listofSubjects.appendChild(opt);
+}
+
+function transactionalSMSbtnProced () {
+//validate the paremter fileds
+
+  jQuery("#dynamicGrid").hide();
+  jQuery("#submitFinal").hide();
+
+var audience = jQuery('#audienceSelect').val();
+var smsForSelectionValue = jQuery('#smsForSelection').val();
+
+  if(smsForSelectionValue == "1"){
+      if(audience == "Student")
+        jQuery("#studentClassSection").show();
+      else
+        jQuery("#staffSlectionDepart").show();
+
+      
+      jQuery("#classListDivID").hide();
+
+  }else  if(smsForSelectionValue == "2"){//bulk
+    jQuery("#studentClassSection").hide();
+    //jQuery("#staffSlectionDepart").hide();
+      
+     if(audience == "Student"){
+        jQuery("#classListDivID").show();
+         jQuery("#submitFinal").show();
+     } else if(audience == "Staff"){
+         jQuery("#classListDivID").hide();
+         jQuery("#submitFinal").hide();
+
+         jQuery("#staffListDivID").show();
+
+
+     }
+
+  }
+  
+}
+
+function sectionSeleted () {
+  
+
+  jQuery("#sListName").html('Students List');
+  jQuery("#dynamicGrid").show();
+  //data neeto be enter to "dynamicGrid" here
+
+  jQuery("#submitFinal").show();
+}
+
+function selectClassSectionSMSFor (argument) {
+ 
+ var audience = jQuery('#audienceSelect').val();
+
+jQuery("#studentClassSection").show();
+jQuery("#dynamicGrid").hide();
+jQuery("#submitFinal").hide();
+jQuery("#staffListDivID").hide();
+
+
+  if(argument == "1"){//individual
+      
+      jQuery("#classListDivID").hide();
+
+    if(audience == "Student"){
+      jQuery("#studentClassSection").show();
+      jQuery("#staffSlectionDepart").hide();
+    
+    }else if(audience == "Staff"){
+        jQuery("#studentClassSection").hide();
+        jQuery("#staffSlectionDepart").show();
+    } 
+
+
+  }else  if(argument == "2"){//bulk
+    jQuery("#studentClassSection").hide();
+    jQuery("#staffSlectionDepart").hide();
+
+    var audience = jQuery('#audienceSelect').val();
+    
+    if(audience == "Student"){
+      jQuery("#classListDivID").show();
+      jQuery("#staffListDivID").hide();
+    
+    }else if(audience == "Staff"){
+      jQuery("#classListDivID").hide();
+      jQuery("#staffListDivID").show();
+      
+    }
+
+
+     jQuery("#submitFinal").show();
+   
+  }
+
+}
+
+function changeDesignation (argument) {
+    jQuery("#sListName").html('Staff List');
+    jQuery("#dynamicGrid").show();
+
+ jQuery("#submitFinal").show();
+
+}
+
+
+  </script>
+
+
+	<div class="reg_mainCon">
+		<form action="" method="post" name="smsForm">
+			<!-- onsubmit="return previewSMSValidate(this)" -->
+			<fieldset>
+				<legend>
+					<img src="./client/assets/images/list_add_user.PNG" class="img-circle">&nbsp;&nbsp;Send
+					SMS
+					<!-- <a href="Access.action?p1=UserSMSView&p2=SA_inst2"  style='margin-top:5px;float: right;' class='btn btn-warning' >Back</a> -->
+
+				</legend>
+
+				<table width="90%" style="margin-left: 15px;" border="0"
+					cellspacing="0" cellpadding="10">
+					<tr>
+						<td><label style="color: #000; float: left;"><b>Select
+									Audience</b></label></td>
+						<td style="float: left"><select class="span2"
+							ng-model="audienceSelect" id="audienceSelect"
+							ng-change="selectAudience(this.value);">
+								<option value="-1" selected="selected">Select</option>
+								<option value="Student">Student</option>
+								<option value="Staff">Staff</option>
+						</select></td>
+						<td style="float: right"><label>You have {{1973}} SMS
+								Credits.</label></td>
+					</tr>
+					<tr>
+						<td colspan="3"
+							style="border-bottom: 1px #000 solid; padding: 0px;"></td>
+					</tr>
+
+
+				</table>
+
+				<table width="90%" style="margin-left: 15px;" border="0"
+					cellspacing="0" cellpadding="10">
+					<tr>
+						<td><input type="radio" name="radioSmsType"
+							id="radioSmsTypeTrans" value="radioSmsTypeTrans"
+							onchange="selectedSMSType('trans');"> <span
+							class="help-inline"> <label style="color: #000;"><b>&nbsp;&nbsp;&nbsp;Transactional</b></label>
+						</span>&nbsp;&nbsp;&nbsp;&nbsp; <i class="icon-question-sign"
+							title="These SMSes will go to everyone in the selected list"></i>
+						</td>
+					<tr>
+						<td></td>
+					</tr>
+					</tr>
+					<tr>
+						<td><input type="radio" name="radioSmsType"
+							id="radioSmsTypePromo" value="radioSmsTypePromo"
+							onchange="selectedSMSType('promo');"> <span
+							class="help-inline"> <label style="color: #000;"><b>&nbsp;&nbsp;&nbsp;Promotional</b></label></span>
+							&nbsp;&nbsp;&nbsp;&nbsp; <i class="icon-question-sign"
+							title="As per TRAI regulation SMS will be received only by those subscribers who haven't registered under DND."></i>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3"
+							style="border-bottom: 1px #000 solid; padding: 0px;"></td>
+					</tr>
+				</table>
+
+				<div style="height: 20px;"></div>
+
+				<div id='transactionalDivID' style="display: none">
+					<div style="padding: 20px; padding-top: 2px;">
+						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td><label style="color: #000;"><b>SMS For</b></label></td>
+									<td><select class="span3" id="smsForSelection"
+										onchange="selectTemplateforSMSFor(this.value)">
+											<option value="-1" selected="selected">--Select--</option>
+											<option value="1">Individual</option>
+											<option value="2">Bulk</option>
+									</select></td>
+									<td><blockquote></blockquote></td>
+									<td><label style="color: #000;"><b>Select
+												Template</b></label></td>
+									<td><select class="span3" id="smsTemplateSelection"
+										onchange="fetchDisplayTemplate(this.value)">
+											<option value="-1" selected="selected">--Select--</option>
+
+									</select></td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+					<div id='templateView' style="padding: 20px; padding-top: 2px;">
+						<table width="100%" cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+
+								<tr>
+									<td><label style="color: #000;"><b>Example : </b></label></td>
+								</tr>
+								<tr>
+									<td><span class="example_box " id='exampleMsgID'>Tomorrowffgfgfgfg
+											school {{v1}} and {{v2}}</span></td>
+								</tr>
+								<tr>
+									<td><label style="color: #000;"><b>Preview : </b></label></td>
+								</tr>
+								<tr>
+									<td><span class="preview_box" id='previewMsgID'>Tomorrow
+											school <b>Bundh</b>
+									</span></td>
+								</tr>
+
+								<tr>
+									<td><label style="color: #000;"><b>Parameters
+												: </b></label></td>
+								</tr>
+								<tr>
+									<td>
+
+										<div id='templateBody' class="boxed">
+											v1(20) <input type="text"><br /> v2(20) <input
+												type="text">
+										</div>
+
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3"
+										style="border-bottom: 1px #000 solid; padding: 0px; padding-top: 15px;">
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+
+					<div id="buttonDivId"
+						style="float: right; padding: 15px; display: none;" class="">
+						<input type="" onclick="return transactionalSMSbtnProced();"
+							class="btn btn-warning" value="Proceed to Send SMS"
+							name="transactionalSMSbtn" id="transactionalSMSbtn">
+					</div>
+
+				</div>
+
+
+				<div id='promotionalID'
+					style="padding: 20px; padding-top: 2px; display: none">
+					<label style="color: #000;"><b>SMS Message</b></label>
+
+					<textarea name="smsbody" cols="30" rows="5" id="smsbody"
+						class="sms_textbox" style="resize: none" onkeyup="limiter()"></textarea>
+					<p class="length" id="noOfCharsTdId">
+						Number of Characters Remains <b> <input readonly="readonly"
+							type="text" id='limit' name="limit" maxlength="3" value="160"></b>
+					</p>
+
+					<p class="length" id="messageExceedsTdId" style="display: none;">
+						<b style="color: #C33;">Message Length Exceed 160 chars </b>
+					</p>
+
+
+					<table>
+						<tr>
+							<td><label style="color: #000;"><b>SMS For</b></label></td>
+							<td>&nbsp;</td>
+							<td><select class="span3" id="smsForSelection"
+								onchange="selectClassSectionSMSFor(this.value)">
+									<option value="-1" selected="selected">--Select--</option>
+									<option value="1">Individual</option>
+									<option value="2">Bulk</option>
+							</select></td>
+						</tr>
+					</table>
+					<div style="border-bottom: 1px solid; padding-top: 0%;"></div>
+				</div>
+
+				<!-- ***************************************************************************************************************************************-->
+
+
+
+
+				<!-- Student-->
+				<div id='studentClassSection'
+					style="padding: 20px; padding-top: 2px; display: none">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td><label style="color: #000;"><b>Class</b></label></td>
+								<td><select class="span3" id="classSelection">
+										<option value="-1" selected="selected">Select</option>
+										<option value="1">Class-I</option>
+										<option value="2">Class-II</option>
+								</select></td>
+								<td><blockquote></blockquote></td>
+								<td><label style="color: #000;"><b>Section</b></label></td>
+								<td><select class="span3" id="sectionSelection"
+									onchange="sectionSeleted(this.value);">
+										<option value="-1" selected="selected">Select</option>
+										<option value="1">A</option>
+										<option value="3">B</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="5"
+									style="border-bottom: 1px #000 solid; padding: 0px; padding-top: 15px;">
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Staff-->
+				<div id='staffSlectionDepart'
+					style="padding: 20px; padding-top: 2px; display: none">
+					<table width="100%" cellspacing="0" cellpadding="0" border="0">
+						<tbody>
+							<tr>
+								<td><label style="color: #000;"><b>Department</b></label></td>
+								<td><select class="span3" id="departmentSelect">
+										<option value="-1" selected="selected">Select</option>
+										<option value="1">India</option>
+										<option value="3">US</option>
+								</select></td>
+								<td><blockquote></blockquote></td>
+								<td><label style="color: #000;"><b>Designation</b></label></td>
+								<td><select class="span3" id="designationSelect"
+									onchange="changeDesignation(this.value);">
+										<option value="-1" selected="selected">Select</option>
+										<option value="1">India</option>
+										<option value="3">US</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="5"
+									style="border-bottom: 1px #000 solid; padding: 0px; padding-top: 15px;">
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+
+				<!-- Student List/Staff List View **This will come dynamically 
+Header fileds r same so for both student and staff we can use this
+-->
+
+
+				<div style="padding: 10px; display: none" id="dynamicGrid">
+					<div>
+						<h3 class="sms_head" id="sListName"></h3>
+					</div>
+					<table width="100%" style="margin-bottom: 0px; color: #000;" id=""
+						class="table table-bordered">
+						<tbody>
+							<tr>
+								<th style="width: 5%"><input type="checkbox" id="selectall">
+								</th>
+								<th style="width: 20%"><label style="color: #000;"><b>Name</b></label></th>
+								<th style="width: 20%"><label style="color: #000;"><b>Father
+											Name</b></label></th>
+								<th style="width: 12%"><label style="color: #000;"><b>Mobile
+											Number</b></label></th>
+								<th style="width: 43%"><label style="color: #000;"><b>Address</b></label></th>
+							</tr>
+
+							<tr>
+								<td><input type="checkbox" value="9848223751"
+									name="profileChecked" onchange="checkBoxCounter(this);">
+								</td>
+								<td>Mohammed Ibrahim Rizwan&nbsp;</td>
+								<td>Mohammed Rizwan Sajid</td>
+								<td>9848223751</td>
+								<td>16-9--406/3/2/b</td>
+							</tr>
+
+
+							<tr>
+								<td><input type="checkbox" value="9885974319"
+									name="profileChecked" onchange="checkBoxCounter(this);">
+								</td>
+								<td>MOHAMMED ABDULLAH MASOOD&nbsp;</td>
+								<td>MOHAMMED MASOOD</td>
+								<td>9885974319</td>
+								<td>17-3-2/19, YAKUTPURA SUPER BAZAR</td>
+
+							</tr>
+							<tr class="special">
+								<td colspan="5"><div style="float: right">
+										Numbers of Contacts Selected <b style="color: #C33;"> <input
+											type="text" value="0" maxlength="3" name="checkCount"
+											id='checkCount' readonly="readonly" class="sms_text_char" /></b>
+									</div></td>
+							</tr>
+
+
+						</tbody>
+					</table>
+
+				</div>
+		</form>
+
+
+		<div style="height: 20px;"></div>
+
+		<!-- ***************************IMP********************** -->
+		<div id="classListDivID"
+			style="padding: 20px; padding-top: 2px; display: none">
+
+			<table width="100%" style="margin-bottom: 0px; color: #000;" id=""
+				class="">
+
+				<tbody>
+					<tr>
+						<td colspan="2">SELECT ALL :<input type="checkbox"
+							onclick="selectAll();" value="Select All" id="selectAllId"></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="padding: 0px;" colspan="2">
+							<table width="350px" cellspacing="0" cellpadding="0" border="0">
+								<tbody>
+									<tr>
+										<td><div id="selectClassForBulk"></div></td>
+									</tr>
+									<tr>
+										<td><div id="checkSMSCountForBulk"></div></td>
+									</tr>
+
+									<tr>
+										<td width="130px">CLASS :</td>
+										<td width="200px" colspan="3">SECTION :</td>
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="1" id="classId_1"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(1,160)"> <input
+											type="hidden" value="160" id="count_of_classId_1"
+											name="count_of_classId_1"> 1st</td>
+
+
+
+										<td width="75"><input type="checkbox" value="1,2035"
+											id="SectionprofileChecked_1_2035"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2035,35);">
+
+											<input type="hidden" value="35"
+											id="value_SectionprofileChecked_1_2035"> A</td>
+
+										<td width="75"><input type="checkbox" value="1,2036"
+											id="SectionprofileChecked_1_2036"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2036,26);">
+
+											<input type="hidden" value="26"
+											id="value_SectionprofileChecked_1_2036"> B</td>
+
+										<td width="75"><input type="checkbox" value="1,2037"
+											id="SectionprofileChecked_1_2037"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2037,22);">
+
+											<input type="hidden" value="22"
+											id="value_SectionprofileChecked_1_2037"> C</td>
+
+										<td width="75"><input type="checkbox" value="1,2038"
+											id="SectionprofileChecked_1_2038"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2038,34);">
+
+											<input type="hidden" value="34"
+											id="value_SectionprofileChecked_1_2038"> D</td>
+
+										<td width="75"><input type="checkbox" value="1,2039"
+											id="SectionprofileChecked_1_2039"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2039,22);">
+
+											<input type="hidden" value="22"
+											id="value_SectionprofileChecked_1_2039"> E</td>
+
+										<td width="75"><input type="checkbox" value="1,2040"
+											id="SectionprofileChecked_1_2040"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(1,2040,21);">
+
+											<input type="hidden" value="21"
+											id="value_SectionprofileChecked_1_2040"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="2" id="classId_2"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(2,204)"> <input
+											type="hidden" value="204" id="count_of_classId_2"
+											name="count_of_classId_2"> 2nd</td>
+
+
+
+										<td width="75"><input type="checkbox" value="2,2029"
+											id="SectionprofileChecked_2_2029"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2029,35);">
+
+											<input type="hidden" value="35"
+											id="value_SectionprofileChecked_2_2029"> A</td>
+
+										<td width="75"><input type="checkbox" value="2,2030"
+											id="SectionprofileChecked_2_2030"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2030,33);">
+
+											<input type="hidden" value="33"
+											id="value_SectionprofileChecked_2_2030"> B</td>
+
+										<td width="75"><input type="checkbox" value="2,2031"
+											id="SectionprofileChecked_2_2031"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2031,30);">
+
+											<input type="hidden" value="30"
+											id="value_SectionprofileChecked_2_2031"> C</td>
+
+										<td width="75"><input type="checkbox" value="2,2032"
+											id="SectionprofileChecked_2_2032"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2032,35);">
+
+											<input type="hidden" value="35"
+											id="value_SectionprofileChecked_2_2032"> D</td>
+
+										<td width="75"><input type="checkbox" value="2,2033"
+											id="SectionprofileChecked_2_2033"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2033,37);">
+
+											<input type="hidden" value="37"
+											id="value_SectionprofileChecked_2_2033"> E</td>
+
+										<td width="75"><input type="checkbox" value="2,2034"
+											id="SectionprofileChecked_2_2034"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(2,2034,34);">
+
+											<input type="hidden" value="34"
+											id="value_SectionprofileChecked_2_2034"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="3" id="classId_3"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(3,206)"> <input
+											type="hidden" value="206" id="count_of_classId_3"
+											name="count_of_classId_3"> 3rd</td>
+
+
+
+										<td width="75"><input type="checkbox" value="3,2023"
+											id="SectionprofileChecked_3_2023"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2023,33);">
+
+											<input type="hidden" value="33"
+											id="value_SectionprofileChecked_3_2023"> A</td>
+
+										<td width="75"><input type="checkbox" value="3,2024"
+											id="SectionprofileChecked_3_2024"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2024,34);">
+
+											<input type="hidden" value="34"
+											id="value_SectionprofileChecked_3_2024"> B</td>
+
+										<td width="75"><input type="checkbox" value="3,2025"
+											id="SectionprofileChecked_3_2025"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2025,31);">
+
+											<input type="hidden" value="31"
+											id="value_SectionprofileChecked_3_2025"> C</td>
+
+										<td width="75"><input type="checkbox" value="3,2026"
+											id="SectionprofileChecked_3_2026"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2026,38);">
+
+											<input type="hidden" value="38"
+											id="value_SectionprofileChecked_3_2026"> D</td>
+
+										<td width="75"><input type="checkbox" value="3,2027"
+											id="SectionprofileChecked_3_2027"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2027,35);">
+
+											<input type="hidden" value="35"
+											id="value_SectionprofileChecked_3_2027"> E</td>
+
+										<td width="75"><input type="checkbox" value="3,2028"
+											id="SectionprofileChecked_3_2028"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(3,2028,35);">
+
+											<input type="hidden" value="35"
+											id="value_SectionprofileChecked_3_2028"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="4" id="classId_4"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(4,209)"> <input
+											type="hidden" value="209" id="count_of_classId_4"
+											name="count_of_classId_4"> 4th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="4,2017"
+											id="SectionprofileChecked_4_2017"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2017,42);">
+
+											<input type="hidden" value="42"
+											id="value_SectionprofileChecked_4_2017"> A</td>
+
+										<td width="75"><input type="checkbox" value="4,2018"
+											id="SectionprofileChecked_4_2018"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2018,39);">
+
+											<input type="hidden" value="39"
+											id="value_SectionprofileChecked_4_2018"> B</td>
+
+										<td width="75"><input type="checkbox" value="4,2019"
+											id="SectionprofileChecked_4_2019"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2019,22);">
+
+											<input type="hidden" value="22"
+											id="value_SectionprofileChecked_4_2019"> C</td>
+
+										<td width="75"><input type="checkbox" value="4,2020"
+											id="SectionprofileChecked_4_2020"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2020,45);">
+
+											<input type="hidden" value="45"
+											id="value_SectionprofileChecked_4_2020"> D</td>
+
+										<td width="75"><input type="checkbox" value="4,2021"
+											id="SectionprofileChecked_4_2021"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2021,39);">
+
+											<input type="hidden" value="39"
+											id="value_SectionprofileChecked_4_2021"> E</td>
+
+										<td width="75"><input type="checkbox" value="4,2022"
+											id="SectionprofileChecked_4_2022"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(4,2022,22);">
+
+											<input type="hidden" value="22"
+											id="value_SectionprofileChecked_4_2022"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="5" id="classId_5"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(5,200)"> <input
+											type="hidden" value="200" id="count_of_classId_5"
+											name="count_of_classId_5"> 5th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="5,2011"
+											id="SectionprofileChecked_5_2011"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2011,44);">
+
+											<input type="hidden" value="44"
+											id="value_SectionprofileChecked_5_2011"> A</td>
+
+										<td width="75"><input type="checkbox" value="5,2012"
+											id="SectionprofileChecked_5_2012"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2012,42);">
+
+											<input type="hidden" value="42"
+											id="value_SectionprofileChecked_5_2012"> B</td>
+
+										<td width="75"><input type="checkbox" value="5,2013"
+											id="SectionprofileChecked_5_2013"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2013,18);">
+
+											<input type="hidden" value="18"
+											id="value_SectionprofileChecked_5_2013"> C</td>
+
+										<td width="75"><input type="checkbox" value="5,2014"
+											id="SectionprofileChecked_5_2014"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2014,41);">
+
+											<input type="hidden" value="41"
+											id="value_SectionprofileChecked_5_2014"> D</td>
+
+										<td width="75"><input type="checkbox" value="5,2015"
+											id="SectionprofileChecked_5_2015"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2015,34);">
+
+											<input type="hidden" value="34"
+											id="value_SectionprofileChecked_5_2015"> E</td>
+
+										<td width="75"><input type="checkbox" value="5,2016"
+											id="SectionprofileChecked_5_2016"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(5,2016,21);">
+
+											<input type="hidden" value="21"
+											id="value_SectionprofileChecked_5_2016"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="6" id="classId_6"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(6,139)"> <input
+											type="hidden" value="139" id="count_of_classId_6"
+											name="count_of_classId_6"> 6th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="6,2006"
+											id="SectionprofileChecked_6_2006"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2006,30);">
+
+											<input type="hidden" value="30"
+											id="value_SectionprofileChecked_6_2006"> A</td>
+
+										<td width="75"><input type="checkbox" value="6,2007"
+											id="SectionprofileChecked_6_2007"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2007,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_6_2007"> B</td>
+
+										<td width="75"><input type="checkbox" value="6,2008"
+											id="SectionprofileChecked_6_2008"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2008,19);">
+
+											<input type="hidden" value="19"
+											id="value_SectionprofileChecked_6_2008"> C</td>
+
+										<td width="75"><input type="checkbox" value="6,2009"
+											id="SectionprofileChecked_6_2009"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2009,36);">
+
+											<input type="hidden" value="36"
+											id="value_SectionprofileChecked_6_2009"> D</td>
+
+										<td width="75"><input type="checkbox" value="6,2010"
+											id="SectionprofileChecked_6_2010"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2010,1);">
+
+											<input type="hidden" value="1"
+											id="value_SectionprofileChecked_6_2010"> E</td>
+
+										<td width="75"><input type="checkbox" value="6,2364"
+											id="SectionprofileChecked_6_2364"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(6,2364,24);">
+
+											<input type="hidden" value="24"
+											id="value_SectionprofileChecked_6_2364"> F</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="7" id="classId_7"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(7,176)"> <input
+											type="hidden" value="176" id="count_of_classId_7"
+											name="count_of_classId_7"> 7th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="7,2001"
+											id="SectionprofileChecked_7_2001"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(7,2001,51);">
+
+											<input type="hidden" value="51"
+											id="value_SectionprofileChecked_7_2001"> A</td>
+
+										<td width="75"><input type="checkbox" value="7,2002"
+											id="SectionprofileChecked_7_2002"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(7,2002,33);">
+
+											<input type="hidden" value="33"
+											id="value_SectionprofileChecked_7_2002"> B</td>
+
+										<td width="75"><input type="checkbox" value="7,2003"
+											id="SectionprofileChecked_7_2003"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(7,2003,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_7_2003"> C</td>
+
+										<td width="75"><input type="checkbox" value="7,2004"
+											id="SectionprofileChecked_7_2004"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(7,2004,34);">
+
+											<input type="hidden" value="34"
+											id="value_SectionprofileChecked_7_2004"> D</td>
+
+										<td width="75"><input type="checkbox" value="7,2005"
+											id="SectionprofileChecked_7_2005"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(7,2005,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_7_2005"> E</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="8" id="classId_8"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(8,146)"> <input
+											type="hidden" value="146" id="count_of_classId_8"
+											name="count_of_classId_8"> 8th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="8,1997"
+											id="SectionprofileChecked_8_1997"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(8,1997,38);">
+
+											<input type="hidden" value="38"
+											id="value_SectionprofileChecked_8_1997"> A</td>
+
+										<td width="75"><input type="checkbox" value="8,1998"
+											id="SectionprofileChecked_8_1998"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(8,1998,30);">
+
+											<input type="hidden" value="30"
+											id="value_SectionprofileChecked_8_1998"> B</td>
+
+										<td width="75"><input type="checkbox" value="8,1999"
+											id="SectionprofileChecked_8_1999"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(8,1999,28);">
+
+											<input type="hidden" value="28"
+											id="value_SectionprofileChecked_8_1999"> C</td>
+
+										<td width="75"><input type="checkbox" value="8,2000"
+											id="SectionprofileChecked_8_2000"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(8,2000,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_8_2000"> D</td>
+
+										<td width="75"><input type="checkbox" value="8,2365"
+											id="SectionprofileChecked_8_2365"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(8,2365,21);">
+
+											<input type="hidden" value="21"
+											id="value_SectionprofileChecked_8_2365"> E</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="9" id="classId_9"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(9,158)"> <input
+											type="hidden" value="158" id="count_of_classId_9"
+											name="count_of_classId_9"> 9th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="9,1993"
+											id="SectionprofileChecked_9_1993"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(9,1993,62);">
+
+											<input type="hidden" value="62"
+											id="value_SectionprofileChecked_9_1993"> A</td>
+
+										<td width="75"><input type="checkbox" value="9,1994"
+											id="SectionprofileChecked_9_1994"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(9,1994,36);">
+
+											<input type="hidden" value="36"
+											id="value_SectionprofileChecked_9_1994"> B</td>
+
+										<td width="75"><input type="checkbox" value="9,1995"
+											id="SectionprofileChecked_9_1995"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(9,1995,31);">
+
+											<input type="hidden" value="31"
+											id="value_SectionprofileChecked_9_1995"> C</td>
+
+										<td width="75"><input type="checkbox" value="9,1996"
+											id="SectionprofileChecked_9_1996"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(9,1996,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_9_1996"> D</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="10" id="classId_10"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(10,150)"> <input
+											type="hidden" value="150" id="count_of_classId_10"
+											name="count_of_classId_10"> 10th</td>
+
+
+
+										<td width="75"><input type="checkbox" value="10,1989"
+											id="SectionprofileChecked_10_1989"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(10,1989,42);">
+
+											<input type="hidden" value="42"
+											id="value_SectionprofileChecked_10_1989"> A</td>
+
+										<td width="75"><input type="checkbox" value="10,1990"
+											id="SectionprofileChecked_10_1990"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(10,1990,37);">
+
+											<input type="hidden" value="37"
+											id="value_SectionprofileChecked_10_1990"> B</td>
+
+										<td width="75"><input type="checkbox" value="10,1991"
+											id="SectionprofileChecked_10_1991"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(10,1991,38);">
+
+											<input type="hidden" value="38"
+											id="value_SectionprofileChecked_10_1991"> C</td>
+
+										<td width="75"><input type="checkbox" value="10,1992"
+											id="SectionprofileChecked_10_1992"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(10,1992,33);">
+
+											<input type="hidden" value="33"
+											id="value_SectionprofileChecked_10_1992"> D</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="12" id="classId_12"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(12,55)"> <input
+											type="hidden" value="55" id="count_of_classId_12"
+											name="count_of_classId_12"> Nursery</td>
+
+
+
+										<td width="75"><input type="checkbox" value="12,2051"
+											id="SectionprofileChecked_12_2051"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(12,2051,47);">
+
+											<input type="hidden" value="47"
+											id="value_SectionprofileChecked_12_2051"> A</td>
+
+										<td width="75"><input type="checkbox" value="12,2052"
+											id="SectionprofileChecked_12_2052"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(12,2052,8);">
+
+											<input type="hidden" value="8"
+											id="value_SectionprofileChecked_12_2052"> B</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="13" id="classId_13"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(13,89)"> <input
+											type="hidden" value="89" id="count_of_classId_13"
+											name="count_of_classId_13"> LKG</td>
+
+
+
+										<td width="75"><input type="checkbox" value="13,2047"
+											id="SectionprofileChecked_13_2047"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(13,2047,45);">
+
+											<input type="hidden" value="45"
+											id="value_SectionprofileChecked_13_2047"> A</td>
+
+										<td width="75"><input type="checkbox" value="13,2048"
+											id="SectionprofileChecked_13_2048"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(13,2048,29);">
+
+											<input type="hidden" value="29"
+											id="value_SectionprofileChecked_13_2048"> B</td>
+
+										<td width="75"><input type="checkbox" value="13,2049"
+											id="SectionprofileChecked_13_2049"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(13,2049,11);">
+
+											<input type="hidden" value="11"
+											id="value_SectionprofileChecked_13_2049"> C</td>
+
+										<td width="75"><input type="checkbox" value="13,2050"
+											id="SectionprofileChecked_13_2050"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(13,2050,4);">
+
+											<input type="hidden" value="4"
+											id="value_SectionprofileChecked_13_2050"> D</td>
+
+
+									</tr>
+
+									<tr>
+										<td><input type="checkbox" value="14" id="classId_14"
+											name="classProfileChecked"
+											onchange="countSelectedCheckBoxCount(14,146)"> <input
+											type="hidden" value="146" id="count_of_classId_14"
+											name="count_of_classId_14"> UKG</td>
+
+
+
+										<td width="75"><input type="checkbox" value="14,2041"
+											id="SectionprofileChecked_14_2041"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(14,2041,49);">
+
+											<input type="hidden" value="49"
+											id="value_SectionprofileChecked_14_2041"> A</td>
+
+										<td width="75"><input type="checkbox" value="14,2042"
+											id="SectionprofileChecked_14_2042"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(14,2042,31);">
+
+											<input type="hidden" value="31"
+											id="value_SectionprofileChecked_14_2042"> B</td>
+
+										<td width="75"><input type="checkbox" value="14,2043"
+											id="SectionprofileChecked_14_2043"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(14,2043,33);">
+
+											<input type="hidden" value="33"
+											id="value_SectionprofileChecked_14_2043"> C</td>
+
+										<td width="75"><input type="checkbox" value="14,2044"
+											id="SectionprofileChecked_14_2044"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(14,2044,32);">
+
+											<input type="hidden" value="32"
+											id="value_SectionprofileChecked_14_2044"> D</td>
+
+										<td width="75"><input type="checkbox" value="14,2045"
+											id="SectionprofileChecked_14_2045"
+											name="SectionprofileChecked"
+											onchange="countSelectedSectionsCheckBox(14,2045,1);">
+
+											<input type="hidden" value="1"
+											id="value_SectionprofileChecked_14_2045"> E</td>
+
+
+									</tr>
+
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr class="special">
+						<td colspan="5">
+							<div style="float: right">
+								Numbers of Contacts Selected <b style="color: #C33;"> <input
+									type="text" value="0" maxlength="3" name="checkCount"
+									id='checkCount' readonly="readonly" class="sms_text_char" /></b>
+							</div>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+		<!--End of classListDivID -->
+
+		<!-- *****************END FOR CLASS SECTION LIST******************************** -->
+
+		<!-- *****************FOR STAFF BULK START******************************** -->
+
+		<div id="staffListDivID"
+			style="padding: 20px; padding-top: 2px; display: none">
+
+			<table width="664px" cellspacing="0" cellpadding="0" border="0"
+				class="table table-bordered">
+				<tbody>
+					<tr>
+						<td class="topalign">Department : <input type="checkbox"
+							onclick="checkedAll();" value="Select All" id="selectAllId">
+						</td>
+						<td colspan="4" style="padding: 0px; border: none;">
+							<table cellspacing="0" cellpadding="0" border="0"
+								class="table table-bordered">
+
+								<tbody>
+									<tr>
+										<td colspan="2"><input type="checkbox"
+											id="departmentId_121" value="121" name="profileChecked"
+											onchange="checkBoxCount(61,this);"> <input
+											type="hidden" value="61" id="count_of_departmentId_121">
+											Teaching</td>
+									</tr>
+
+									<tr>
+										<td colspan="2"><input type="checkbox"
+											id="departmentId_122" value="122" name="profileChecked"
+											onchange="checkBoxCount(4,this);"> <input
+											type="hidden" value="4" id="count_of_departmentId_122">
+											Non Teaching</td>
+									</tr>
+
+									<tr>
+										<td colspan="2"><input type="checkbox"
+											id="departmentId_123" value="123" name="profileChecked"
+											onchange="checkBoxCount(16,this);"> <input
+											type="hidden" value="16" id="count_of_departmentId_123">
+											Transport</td>
+									</tr>
+
+									<tr>
+										<td colspan="2"><input type="checkbox"
+											id="departmentId_125" value="125" name="profileChecked"
+											onchange="checkBoxCount(3,this);"> <input
+											type="hidden" value="3" id="count_of_departmentId_125">
+											Admin</td>
+									</tr>
+
+									<tr>
+										<td colspan="2"><input type="checkbox"
+											id="departmentId_126" value="126" name="profileChecked"
+											onchange="checkBoxCount(3,this);"> <input
+											type="hidden" value="3" id="count_of_departmentId_126">
+											Accounts</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</td>
+					</tr>
+
+				</tbody>
+			</table>
+
+		</div>
+		<!-- *****************FOR STAFF BULK END******************************** -->
+
+
+		<div id='noOfCantacts' style="float: right; display: none">
+			<b style="color: #000;">Numbers of Contacts Selected</b>&nbsp;&nbsp;&nbsp;
+			<b style="color: #C33;"> <input type="text" value="0"
+				style="color: #C33;" maxlength="3" id="selectedSMSCount"
+				class="sms_text_char" name="checkCount" readonly="readonly"></b>
+		</div>
+
+
+		<!-- ************************************************* -->
+		<div style="height: 20px;"></div>
+
+		<div id='submitFinal' style="text-align: center; display: none">
+			<!--;padding-top: 30px -->
+			<button onclick="" class="btn btn-warning" style="margin-left: 20px;"
+				name="searchID" id="searchID" type="button">Submit</button>
+			&nbsp;
+			<button onclick="" class="btn btn-warning" style="margin-left: 10px;"
+				name="resetID" id="resetID" type="button">Cancel</button>
+			&nbsp; &nbsp;
+		</div>
+
+		<!-- -->
+
+	</div>
+
+
+
